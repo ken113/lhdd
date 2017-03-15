@@ -1,0 +1,99 @@
+.md-login{
+	height:100%;
+	background:#f2f2f2;
+
+	.logo{
+		text-align: center;
+		padding-top: .3rem;
+
+		img{
+			width:1.8rem;
+		}
+	}
+	.logo-form.load{ margin-top:.3rem; }
+	.logo-form{
+
+		margin:.3rem;
+		border:1px solid #666;
+		background:#fff;
+		text-align: center;
+		padding:.3rem 0;
+		margin-top: -3.5rem;
+		transition: margin-top .5s;
+
+		.from-item{
+			height: .3rem;
+			line-height: .3rem;
+			width:2.4rem;
+			display: inline-block;
+			margin:.1rem 0;
+			border:1px solid #999;
+			box-sizing: border-box;
+
+			i{
+				display: inline-block;
+				font-size: .18rem;
+				color:#2E9DE6;
+			}
+
+			input{
+				display: inline-block;
+				height: .28rem;
+				line-height: .28rem;
+				width:2rem;
+				border:0;
+				outline: 0;
+				box-sizing: border-box;
+				vertical-align: top;
+				text-indent: .1rem;
+			}
+		}
+		.from-item.vercode{
+
+			border:0;
+			overflow: hidden;
+
+			input{
+				float:left;
+				width:1.2rem;
+				border:1px solid #999;
+			}
+
+			img{
+				width:1rem;
+				height: .28rem;
+				float:right;
+			}
+			.icon-check{
+				display: none;
+			}
+			.icon-check.show{
+				display: inline-block;
+			}
+		}
+
+		.login-btn{
+			margin-top: .3rem;
+			button{
+				display: inline-block;
+				width:2.4rem;
+				height: .34rem;
+				line-height: .34rem;
+				color:#fff;
+				background: #2E9DE6;
+				border-radius: 5px;
+				outline:none;
+				border:0;
+				font-size: .14rem;
+			}
+		}
+	}
+
+	.copyright{
+		
+		position: absolute;
+		bottom:.3rem;
+		padding:0 .2rem;
+		background:#f2f2f2;
+	}
+}

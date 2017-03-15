@@ -1,0 +1,65 @@
+.md-editVisitor{
+
+	height:calc( 100% - .9rem );
+	overflow-y: auto;
+    margin-top: .4rem;
+
+	.user-form{
+		margin:.2rem;
+
+		h3{
+			//font-weight: 400;
+			color:#000;
+			span{
+				float:right;
+			}
+		}
+
+		.form-item{
+			margin: .05rem 0;
+			label{
+				display: inline-block;
+				width:100%;
+				height: .24rem;
+				line-height: .24rem;
+			}
+
+			input[type=text]{
+				display: inline-block;
+				width:100%;
+				height: .28rem;
+				line-height: .28rem;
+			}
+
+		}
+
+		.else-info{
+			margin-top: .2rem;
+
+			.ei-box{
+				display: none;
+			}
+			.ei-box.show{
+				display: block;
+			}
+		}
+
+		.btm-btn{
+
+			text-align: center;
+			margin: .2rem 0;
+
+			button{
+				display: inline-block;
+				width:100%;
+				height: .34rem;
+				line-height: .34rem;
+				color:#fff;
+				background: #2E9DE6;
+				border-radius: 5px;
+				outline:none;
+				border:0;
+			}
+		}
+	}
+}

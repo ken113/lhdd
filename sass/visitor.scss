@@ -1,0 +1,78 @@
+.md-visitor{
+
+	margin-top:.4rem;
+	overflow-y: auto;
+	height:calc(100% - .9rem );
+
+	.top-btn{
+
+		margin:.2rem;
+		display: flex;
+		justify-content: space-between;
+
+		a{
+			width:46%;
+			height: .34rem;
+			line-height: .34rem;
+			color:#fff;
+			font-size:.14rem;
+			background: #2E9DE6;
+			text-align: center;
+			border-radius: 5px;
+			text-decoration: none;
+		}
+		span{
+
+			
+
+			i{
+				font-size:.18rem;
+			}
+		}
+
+		a.share{
+			background:#fff;
+			border:1px solid #2E9DE6;
+			color:#2E9DE6;
+		}
+	}
+
+	.user-list{
+		margin:0 .2rem;
+		a{
+			text-decoration: none;
+		}
+		.user-box{
+			margin-bottom: .1rem;
+
+			.username{
+				height: .24rem;
+				line-height: .24rem;
+				color:#000;
+				font-size:.16rem;
+
+				label{
+					display: inline-block;
+					width:1rem;
+				}
+			}
+			.userelse{
+				height: .18rem;
+				line-height: .18rem;
+				color:#333;
+				font-size:.14rem;
+				label{
+					display: inline-block;
+					width:1rem;
+				}
+				.weitianxie{ color:#FF6600; }
+
+				.icon-right{
+					float:right;
+					font-size:.22rem;
+					color:#333;
+				}
+			}
+		}
+	}
+}

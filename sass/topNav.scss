@@ -1,0 +1,36 @@
+.md-topNav{
+
+	height:.4rem;
+	line-height:.4rem;
+	background:#000;
+	text-align:center;
+	color: #fff;
+	position: fixed;
+	top:0;
+	width:100%;
+	span{
+		display: inline-block;
+		float: left;
+	}
+
+	.goback{
+		width:15%;
+		i{
+			font-size:.3rem;
+			margin-right: .05rem;
+			margin-top: -.03rem;
+    		vertical-align: middle;
+		}
+	}
+	.title{
+		width:70%;
+		color:#fff;
+		font-size:.16rem;
+	}
+	.more{
+		width:15%;
+		i{
+			font-size:.2rem;
+		}
+	}
+}
