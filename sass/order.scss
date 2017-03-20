@@ -1,8 +1,10 @@
 .md-order{
-	height:calc(100% - .9rem );
+	height:calc(100% - .5rem );
 	background:#F2F2F2;
 	overflow-y:auto;
-	margin-top:.4rem;
+	height: 100%;
+
+	//margin-top:.4rem;
 	.order-box{
 
 		margin:.2rem .1rem;
@@ -47,9 +49,10 @@
 				background:#fff;
 				height: .9rem;
 				margin-top: .1rem;
+				border-radius: 5px;
 
 				.if-lf{
-					float: left;
+					float:left;
 					width:2.4rem;
 					padding-left: .1rem;
 
@@ -91,6 +94,7 @@
 				.if-rt.daihedui{background:#FFCC00;}
 				.if-rt.yiqueren{
 					background:#2E9DE6;
+					color: #fff;
 					i{ color:#fff; }
 				}
 			}

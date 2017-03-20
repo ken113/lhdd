@@ -8,6 +8,10 @@ html,body,#app{
 	font-size: .14rem;
 	color:#333;
 }
+a{
+	text-decoration: none;
+	color:#333;
+}
 .modal-box{
 	position: fixed;
 	left:50%;
@@ -19,7 +23,7 @@ html,body,#app{
 	border:1px solid #e8e8e8;
 	background: #fff;
 	visibility: hidden;
-	transform: scale(0);
+	/*transform: scale(0);*/
 	transition: transform .18s;
 }
 .modal-box.show{
@@ -32,6 +36,11 @@ html,body,#app{
     text-align: center;
     color: #2E9DE6;
 }
+#md-modal-error .modal-icon{
+	color: #fc5651;
+}
+
+
 .modal-box .modal-msg{
 	margin: 0 .2rem;
     font-size: .16rem;
@@ -50,3 +59,44 @@ html,body,#app{
     bottom: 0;
     width: 100%;
 }
+#md-modal-error .modal-btn{
+	background: #fc5651;
+}
+#md-modal-confirm button{
+	height: .4rem;
+	line-height: .4rem;
+	text-align: center;
+	background: #2E9DE6;
+	color:#fff;
+	font-size: .16rem;
+	position: absolute;
+    bottom: 0;
+    width: 48%;
+    outline: none;
+    border:0;
+}
+#md-modal-confirm button.cancel{
+	right:0;
+	border:1px solid #2E9DE6;
+	color:#2E9DE6;
+	background: #fff;
+}
+.datepicker-viewport,.datepicker-scroll{
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	-ms-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	-webkit-overflow-scrolling : touch;
+	overflow-scrolling : touch;
+}
+.md-loading{
+	position: absolute;
+	height: 1rem;
+	width: 1rem;
+	left:50%;
+	top:50%;
+	margin-left: -.5rem;
+	margin-top: -.5rem;
+	z-index: 100;
+}
+.md-loading img{ width:100%; height: 100%; }

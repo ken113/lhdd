@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Link } from 'react-router';
 import DatePicker from 'react-mobile-datepicker';
-import { convertDate } from './../lib/common';
-
+import { convertDate,modal,setTitle } from './../lib/common';
+import axios from 'axios';
 import TopNav from './topNav';
 import BtmNav from './btmNav'
 
@@ -18,6 +18,14 @@ class AddVisitor extends React.Component {
 			isOpen: false,
 		}
 	}
+	componentWillMount(){
+		setTitle('新增常用游客');
+	}
+	componentDidMount(){
+		setTimeout(function(){
+			document.getElementsByClassName('md-nav')[0].getElementsByTagName('a')[1].className += ' selected';
+		},0);
+	}
 	handleClick(){
 		this.setState({ isOpen: true });
 	}
@@ -30,24 +38,61 @@ class AddVisitor extends React.Component {
 	change(e){
 		this.setState({ time, isOpen: false });
 	}
+	changeSex( e ){
+
+		const sex = document.getElementById('sex');
+		if( e.target.value === '男' ){
+			sex.value = '女';
+		}else{
+			sex.value = '男';
+		}
+	}
+	save(){
+
+		const that = this;
+
+		axios.post('/Users/AddTraveller',{
+			CustomerID: sessionStorage.getItem('CustomerID'),
+			TravellerName: document.getElementById('username').value,
+			TravellerEnname: document.getElementById('en_username').value,
+			PassportNo:document.getElementById('passport').value,
+			Birthday:convertDate(that.state.time,'YYYY-MM-DD'),
+			TravellerSex: document.getElementById('sex').value === '男' ? 0 : 1
+		}).then(function (response) {
+
+			const data = response.data;
+			if( data.ErrorCode === 200 ){
+				modal.success('新增成功');
+				setTimeout(function(){
+					document.getElementById('md-modal-success').classList.remove('show');
+					window.location.hash = "#/visitor";
+				},1000);
+			}else{
+				modal.error( data.ErrorMessage );
+			}
+		})
+	}
+	cancel(){
+		window.location.hash = "#/visitor";
+	}
 	render(){
 
 		return(
 			 <div className="md-addVisitor">
-			 	<TopNav title='新增常用游客'/>
+			 	{/*<TopNav title='新增常用游客'/>*/}
 			 		<div className="add-form">
 			 			<div className="tips-msg">一次输入，永久保存，多次使用，更加方便</div>
 			 			<div className="form-item">
 			 				<label>中文姓名:</label>
-			 				<input type="text"/>
+			 				<input type="text" id="username"/>
 			 			</div>
 			 			<div className="form-item">
 			 				<label>姓名拼音:</label>
-			 				<input type="text"/>
+			 				<input type="text" id="en_username"/>
 			 			</div>
 			 			<div className="form-item">
 			 				<label>护照号码:</label>
-			 				<input type="text"/>
+			 				<input type="text" id="passport"/>
 			 			</div>
 			 			<div className="form-item">
 			 				<label>生日:</label>
@@ -60,12 +105,12 @@ class AddVisitor extends React.Component {
 			 			</div>
 			 			<div className="form-item">
 			 				<label>性别:</label>
-			 				<input type="text"/>
+			 				<input type="text" id="sex" value='男' readOnly onClick={this.changeSex.bind(this)}/>
 			 			</div>
 			 		</div>
 			 		<div className="btm-btn">
-			 			<button>保存</button>
-			 			<button className="cancel">取消</button>
+			 			<button onClick={this.save.bind(this)}>保存</button>
+			 			<button className="cancel" onClick={this.cancel.bind(this)}>取消</button>
 			 		</div>
 			 	<BtmNav/>
 			 </div>

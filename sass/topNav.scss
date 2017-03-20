@@ -1,13 +1,14 @@
 .md-topNav{
 
-	height:.4rem;
-	line-height:.4rem;
-	background:#000;
+	height:.5rem;
+	line-height:.5rem;
+	background:#0697da;
 	text-align:center;
 	color: #fff;
 	position: fixed;
 	top:0;
 	width:100%;
+	z-index:10;
 	span{
 		display: inline-block;
 		float: left;
@@ -25,7 +26,7 @@
 	.title{
 		width:70%;
 		color:#fff;
-		font-size:.16rem;
+		font-size:.18rem;
 	}
 	.more{
 		width:15%;

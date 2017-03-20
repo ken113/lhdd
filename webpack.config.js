@@ -15,8 +15,8 @@ config = {
 			'react',
 			'react-dom',
 			//'redux',
-			'element-dataset',
-			//path.resolve(__dirname, './lib/common.js')
+			//'element-dataset',
+			path.resolve(__dirname, './lib/common.js')
 		]
 	},
 	output: {

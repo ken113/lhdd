@@ -10,6 +10,8 @@ import Order from './../view/order';
 import Visitor from './../view/visitor';
 import EditVisitor from './../view/editVisitor';
 import AddVisitor from './../view/addVisitor';
+import ModifyUser from './../view/modifyUser';
+import ModifyPwd from './../view/modifyPwd';
 
 import './../css/style.css';
 import './../css/font-awesome.css';
@@ -46,6 +48,8 @@ const router = (
         <Route path="visitor" component={Visitor}/>
         <Route path="editVisitor" component={EditVisitor}/>
         <Route path="addVisitor" component={AddVisitor}/>
+        <Route path="modifyUser" component={ModifyUser}/>
+        <Route path="modifyPwd" component={ModifyPwd}/>
 	</Router>
 	);
 
