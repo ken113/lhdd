@@ -35,6 +35,7 @@ a{
     font-size: .8rem;
     text-align: center;
     color: #2E9DE6;
+    margin-bottom: .1rem;
 }
 #md-modal-error .modal-icon{
 	color: #fc5651;
@@ -42,11 +43,12 @@ a{
 
 
 .modal-box .modal-msg{
-	margin: 0 .2rem;
-    font-size: .16rem;
+	margin: 0 .1rem;
+    font-size: .15rem;
     height: .6rem;
     color:#333;
     text-align: center;
+    word-break: break-word;
 }
 .modal-box .modal-btn{
 	height: .4rem;

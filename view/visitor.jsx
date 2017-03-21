@@ -16,6 +16,7 @@ class User extends React.Component {
 		super( props );
 		this.state = {
 			travellersList : [],
+			travellerId: 0
 		}
 	}
 	componentWillMount(){
@@ -32,7 +33,8 @@ class User extends React.Component {
 			if( data.ErrorCode === 200 ){
 
 				that.setState({
-					travellersList: [ ...data.UserInfo.Travellers ]
+					travellersList: [ ...data.UserInfo.Travellers ],
+					travellerId:data.UserInfo.CustomerID
 				});	
 
 				sessionStorage.setItem( 'CustomerID', data.UserInfo.CustomerID );
@@ -85,6 +87,12 @@ class User extends React.Component {
 
 		});
 	}
+	copyUrl(){
+
+		const url = window.location.host+'/wap/addVisitor.html?travellerId='+this.state.travellerId;
+
+		modal.alert( '复制该URL发送给好友<div style="padding-top:5px;">'+ url + '</div>');
+	}
 	render(){
 
 		//debugger;
@@ -94,7 +102,7 @@ class User extends React.Component {
 			 	{/*<TopNav title='常用游客'/>*/}
 			 	<div className="top-btn">
 			 		<Link to="addVisitor"><span className="plus"><i className="fa fa-user-plus"></i>新增常用游客</span></Link>
-			 		<a className="share" href="/addVisitor.html"><span className="share"><i className="fa fa-share-square-o"></i>邀请朋友填写</span></a>
+			 		<a className="share" onClick={this.copyUrl.bind(this)}><span className="share"><i className="fa fa-share-square-o"></i>邀请朋友填写</span></a>
 			 	</div>
 			 	<div className="user-list">
 			 		{/*<Link to="/editVisitor">
