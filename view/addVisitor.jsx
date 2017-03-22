@@ -83,19 +83,19 @@ class AddVisitor extends React.Component {
 			 		<div className="add-form">
 			 			<div className="tips-msg">一次输入，永久保存，多次使用，更加方便</div>
 			 			<div className="form-item">
-			 				<label>中文姓名:</label>
+			 				<label><i className="mandatory-fields">*</i>中文姓名:</label>
 			 				<input type="text" id="username"/>
 			 			</div>
 			 			<div className="form-item">
-			 				<label>姓名拼音:</label>
+			 				<label><i className="mandatory-fields">*</i>姓名拼音:</label>
 			 				<input type="text" id="en_username"/>
 			 			</div>
 			 			<div className="form-item">
-			 				<label>护照号码:</label>
+			 				<label><i className="mandatory-fields">*</i>护照号码:</label>
 			 				<input type="text" id="passport"/>
 			 			</div>
 			 			<div className="form-item">
-			 				<label>生日:</label>
+			 				<label><i className="mandatory-fields">*</i>生日:</label>
 			 				<span className="calendar-box">
 			 					<input type="text" readOnly onClick={this.handleClick.bind(this)} value={convertDate(this.state.time,'YYYY-MM-DD')} onChange={this.change.bind(this)} />
 			 					<i className="icon-calendar fa fa-calendar"></i>

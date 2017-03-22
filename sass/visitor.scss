@@ -37,11 +37,16 @@
 			color:#2E9DE6;
 		}
 	}
+	.copy-url{
+		padding:.1rem .2rem;
+		border:1px solid #999;
+		    word-break: break-word;
+	}
 
 	.user-list{
 		//margin:0 .2rem;
 		overflow: hidden;
-
+		margin-bottom: .6rem;
 		a{
 			text-decoration: none;
 		}

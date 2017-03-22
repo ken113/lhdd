@@ -198,19 +198,19 @@ class EditVisitor extends React.Component {
 			 		<div className="base-info">
 			 			<h3>基本资料<span><input type="checkbox"/>设为本人</span></h3>
 			 			<div className="form-item">
-			 				<label>中文姓名:</label>
+			 				<label><i className="mandatory-fields">*</i>中文姓名:</label>
 			 				<input type="text" id="username" value={this.state.TravellerName} onChange={this.changeInput.bind(this)}/>
 			 			</div>
 			 			<div className="form-item">
-			 				<label>姓名拼音:</label>
+			 				<label><i className="mandatory-fields">*</i>姓名拼音:</label>
 			 				<input type="text" id="en_username" value={this.state.TravellerEnname} onChange={this.changeInput.bind(this)}/>
 			 			</div>
 			 			<div className="form-item">
-			 				<label>护照号码:</label>
+			 				<label><i className="mandatory-fields">*</i>护照号码:</label>
 			 				<input type="text" id="passport" value={this.state.PassportNo} onChange={this.changeInput.bind(this)}/>
 			 			</div>
 			 			<div className="form-item">
-			 				<label>生日</label>
+			 				<label><i className="mandatory-fields">*</i>生日</label>
 			 				<span className="calendar-box">
 			 					<input type="text" readOnly onClick={this.handleClick.bind(this)} value={convertDate(this.state.time,'YYYY-MM-DD')} onChange={this.change.bind(this)} />
 			 					<i className="icon-calendar fa fa-calendar"></i>
@@ -227,15 +227,15 @@ class EditVisitor extends React.Component {
 			 			<h3 onClick={this.showElse.bind(this)} ><input type="checkbox" id="elseCheckBox"/>附加资料</h3>
 			 			<div className="ei-box" id="elseBox">
 			 				<div className="form-item">
-				 				<label>身高:(CM)</label>
+				 				<label><i className="mandatory-fields">*</i>身高:(CM)</label>
 				 				<input type="text" id="height" value={this.state.TravellerDetail.Height} onChange={this.changeInput.bind(this)}/>
 				 			</div>
 				 			<div className="form-item">
-				 				<label>体重:(KG)</label>
+				 				<label><i className="mandatory-fields">*</i>体重:(KG)</label>
 				 				<input type="text" id="weight" value={this.state.TravellerDetail.Weight} onChange={this.changeInput.bind(this)}/>
 				 			</div>
 				 			<div className="form-item">
-				 				<label>鞋子码数:</label>
+				 				<label><i className="mandatory-fields">*</i>鞋子码数:</label>
 				 				<input type="text" id="shoesSize" value={this.state.TravellerDetail.ShoesSize} onChange={this.changeInput.bind(this)}/>
 				 			</div>
 				 			<div className="form-item">

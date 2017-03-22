@@ -80,15 +80,15 @@ class ModifyPwd extends React.Component {
 				<div className="modify-form">
 		 			<div className="tips-msg">系统第一次默认使用联系电话作为初始密码。为了安全起见，请修改为您的常用密码。</div>
 		 			<div className="form-item">
-		 				<label>旧密码:</label>
+		 				<label><i className="mandatory-fields">*</i>旧密码:</label>
 		 				<input type="password" id="oldPassword" value={this.state.oldPassword} onChange={this.change.bind(this)} placeholder="请输入旧密码"/>
 		 			</div>
 		 			<div className="form-item">
-		 				<label>新密码:</label>
+		 				<label><i className="mandatory-fields">*</i>新密码:</label>
 		 				<input type="password" id="newPassword" value={this.state.newPassword} onChange={this.change.bind(this)} placeholder="请输入新密码"/>
 		 			</div>
 		 			<div className="form-item">
-		 				<label>确认新密码:</label>
+		 				<label><i className="mandatory-fields">*</i>确认新密码:</label>
 		 				<input type="password" id="newPassword2" value={this.state.newPassword2} onChange={this.change.bind(this)} placeholder="请再次输入新密码" />
 		 			</div>
 		 		</div>

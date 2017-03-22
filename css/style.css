@@ -12,6 +12,7 @@ a{
 	text-decoration: none;
 	color:#333;
 }
+.mandatory-fields{ color:#ff0000 !important; padding-right:3px; font-style: normal; }
 .modal-box{
 	position: fixed;
 	left:50%;
