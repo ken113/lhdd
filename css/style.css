@@ -1,6 +1,8 @@
 *{
 	margin:0;
 	padding:0;
+	font-family:Helvetica, Tahoma, Arial, 微软雅黑, "Microsoft YaHei", sans-serif, SimSun, 宋体;
+	line-height: .2rem;
 }
 html,body,#app{
 	height: 100%;

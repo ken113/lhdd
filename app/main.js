@@ -7,6 +7,7 @@ import Login from './../view/login';
 import Index from './../view/index';
 import User from './../view/user';
 import Order from './../view/order';
+import OrderDetail from './../view/orderDetail';
 import Visitor from './../view/visitor';
 import EditVisitor from './../view/editVisitor';
 import AddVisitor from './../view/addVisitor';
@@ -45,6 +46,7 @@ const router = (
 		<Route path="login" component={Login}/>
 		<Route path="user" component={User}/>
         <Route path="order" component={Order}/>
+        <Route path="orderDetail" component={OrderDetail}/>
         <Route path="visitor" component={Visitor}/>
         <Route path="editVisitor" component={EditVisitor}/>
         <Route path="addVisitor" component={AddVisitor}/>

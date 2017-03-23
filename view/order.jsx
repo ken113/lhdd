@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-
+//import { Link } from 'react-router';
 //import TopNav from './topNav';
 import BtmNav from './btmNav';
 import classnames from 'classnames';
@@ -64,6 +64,12 @@ class Order extends React.Component {
 			
 		})
 	}
+	goNext( status,orderId ){
+		
+		if( status === '已确认' ){
+			window.location.hash = "#/orderDetail?OrderID=" + orderId;
+		}
+	}
 	render(){
 
 		return(
@@ -122,7 +128,7 @@ class Order extends React.Component {
 			 			))}
 			 		</div>
 			 	</section>
-			 	<section className="order-box confirm">
+			 	<section className="order-box done">
 			 		<div className="title">
 			 			<span>已确认订单</span>
 			 			<p className="line"></p>
@@ -146,14 +152,14 @@ class Order extends React.Component {
 			 			))}
 			 		</div>
 			 	</section>
-			 	<section className="order-box confirm">
+			 	<section className="order-box all">
 			 		<div className="title" onClick={this.showAll.bind(this)}>
 			 			<span>查看全部订单</span>
 			 			<p className="line"></p>
 			 		</div>
 			 		<div className="order-list">
 			 			{this.state.allList.map( (result,index) => (
-			 				<div className="order-info" key={index}>
+			 				<div className="order-info" key={index} onClick={this.goNext.bind(this,result.stateName,result.OrderID)} >
 				 				<div className="if-lf">
 				 					<div className="order-title">{result.cnItemName}</div>
 				 					<div className="order-person">人数:

@@ -5,6 +5,9 @@
 	height: 100%;
 
 	//margin-top:.4rem;
+
+	.order-box.all{ margin-bottom:.6rem; }
+
 	.order-box{
 
 		margin:.2rem .1rem;
@@ -55,10 +58,13 @@
 					float:left;
 					width:2.4rem;
 					padding-left: .1rem;
+					font-size: .15rem;
 
 					.order-title{
 						height: .45rem;
 						line-height:.45rem;
+						color:#111;
+						font-weight: 600;
 					}
 					.order-person{
 						height: .45rem;
