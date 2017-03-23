@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import TopNav from './topNav';
+//import TopNav from './topNav';
 import BtmNav from './btmNav';
 import classnames from 'classnames';
 import axios from 'axios';

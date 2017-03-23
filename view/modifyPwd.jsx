@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
-import TopNav from './topNav';
+//import TopNav from './topNav';
 import BtmNav from './btmNav'
 
 import { modal,setTitle } from './../lib/common';

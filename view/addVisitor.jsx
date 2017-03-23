@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import DatePicker from 'react-mobile-datepicker';
 import { convertDate,modal,setTitle } from './../lib/common';
 import axios from 'axios';
-import TopNav from './topNav';
+//import TopNav from './topNav';
 import BtmNav from './btmNav'
 
 import './../sass/addVisitor.scss';

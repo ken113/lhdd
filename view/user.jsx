@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import axios from 'axios';
 import { delCookie,setTitle } from './../lib/common';
 
-import TopNav from './topNav';
+//import TopNav from './topNav';
 import BtmNav from './btmNav'
 
 import './../sass/user.scss';

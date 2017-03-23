@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Link } from 'react-router';
 import axios from 'axios';
-import TopNav from './topNav';
+//import TopNav from './topNav';
 import BtmNav from './btmNav';
 import touch from 'touchjs';
 

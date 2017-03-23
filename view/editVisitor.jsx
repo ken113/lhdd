@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Link } from 'react-router';
 import { getUrlParam,convertDate,modal,setTitle } from './../lib/common';
 import DatePicker from 'react-mobile-datepicker';
-import TopNav from './topNav';
+//import TopNav from './topNav';
 import BtmNav from './btmNav'
 import axios from 'axios';
 
