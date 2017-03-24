@@ -1,8 +1,107 @@
 .md-orderDetail{
 
 	height:calc(100% - .5rem );
-	background:#F2F2F2;
+	background:#fff;
 	overflow-y:auto;
 	height: 100%;
 
+    text-align: center;
+
+	.QR-CODE{
+		margin-bottom: 1rem; 
+	}
 }
+.top-user-name{
+    height: .4rem;
+    line-height: .4rem;
+    text-align:center;
+    font-weight: 600;
+    font-size: .18rem;
+    background:#fff;
+}
+        .bookingorder {
+            display: inline-block;
+            background: #fff;
+            position: relative;
+            padding-left: .05rem;
+            padding-right: .05rem;
+            
+        }
+        .bookingorder *{
+            box-sizing: border-box !important;;
+            font-size:.13rem !important;
+        }
+        
+        .bookingorder:before,
+        .bookingorder:after {
+            clear: both;
+            content: "";
+            display: table
+        }
+        
+        .bookingorder .QR-CODE {
+            display: inline-block;
+            height: .84rem;
+            width: 100%;
+            margin-top: .1rem;
+        }
+        
+        .bookingorder .QR-CODE .left {
+            float: left
+        }
+        
+        .bookingorder .QR-CODE .left .marktips {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: .02rem;
+            margin-top: .05rem;
+        }
+        
+        .bookingorder .QR-CODE .left .line-vertical {
+            display: inline-block;
+            vertical-align: top;
+            height: .78rem;
+            border-right: 1px solid #000;
+            width: .1rem;
+                margin-top: .02rem;
+        }
+        
+        .bookingorder .QR-CODE .left .one-line {}
+        
+        .bookingorder .QR-CODE .right {
+            display: table-cell;
+            max-width: 100%;
+            position: absolute;
+            margin-left: 1.92rem;
+            vertical-align: middle;
+            padding-top: .03rem;
+        }
+        
+        .bookingorder .orderdetailtips {
+            margin-bottom: .05rem;
+        }
+        
+        .bookingorder .orderdetailtitle {
+            background: #fff;
+            margin-bottom: .05rem;
+            text-align: center
+        }
+        
+        .bookingorder .orderdetailtitle .icon img {
+            height: .4rem;
+        }
+        
+        .bookingorder .orderdetailtitle .icon {
+            display: inline-block;
+            height: 40px
+        }
+        
+        .bookingorder .orderdetailtitle .word {
+            line-height: 40px;
+            font-weight: bold;
+            font-size: 24px;
+            color: #333;
+            display: inline-block;
+            height: 40px;
+            vertical-align: top
+        }

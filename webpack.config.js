@@ -3,6 +3,7 @@ var  webpack = require('webpack');
 var  HtmlWebpackPlugin = require('html-webpack-plugin');
 var  ExtractTextPlugin = require('extract-text-webpack-plugin');
 var  CleanPlugin = require('clean-webpack-plugin');
+var TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 config = {
 	entry: {
@@ -71,7 +72,8 @@ config = {
 			allChunks: true,
 			disable: false
 		}),
-		new CleanPlugin(['dist'])
+		//new CleanPlugin(['dist']),
+		new TransferWebpackPlugin( [{from: 'images'} ], path.resolve(__dirname,"dist"))
 	]
 };
 

@@ -196,7 +196,7 @@ class EditVisitor extends React.Component {
 			 	{/*<TopNav title='修改常用游客'/>*/}
 			 	<div className="user-form">
 			 		<div className="base-info">
-			 			<h3>基本资料<span><input type="checkbox"/>设为本人</span></h3>
+			 			<h3>基本资料<span><input type="checkbox" style={{display:'none'}}/>设为本人</span></h3>
 			 			<div className="form-item">
 			 				<label><i className="mandatory-fields">*</i>中文姓名:</label>
 			 				<input type="text" id="username" value={this.state.TravellerName} onChange={this.changeInput.bind(this)}/>

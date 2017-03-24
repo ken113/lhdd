@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 import BtmNav from './btmNav';
 import classnames from 'classnames';
 import axios from 'axios';
-import { setTitle,loading } from './../lib/common';
+import { setTitle,loading,modal } from './../lib/common';
 import './../sass/order.scss';
 
 
@@ -47,8 +47,8 @@ class Order extends React.Component {
 				});	
 			}
 		})
-
-		
+	}
+	componentDidUpdate(){
 	}
 	showAll(){
 		let that = this;
@@ -66,8 +66,24 @@ class Order extends React.Component {
 	}
 	goNext( status,orderId ){
 		
-		if( status === '已确认' ){
+		if( status === 0 ){
+			window.location.href = '/wap/modifyOrder.html?OrderID=' + orderId;
+		}else if( status === 10 ){
+			modal.alert('请联系旺旺客服帮您处理订单');
+		}else if( status ===  20 ){
+			window.location.href = '/wap/modifyOrder.html?OrderID=' + orderId;
+		}else if( status === 30 ){
+			modal.alert('请联系旺旺客服帮您处理订单');
+		}else if( status === 40 ){
 			window.location.hash = "#/orderDetail?OrderID=" + orderId;
+		}else if( status === 50 ){
+			window.location.hash = "#/orderDetail?OrderID=" + orderId;
+		}else if( status === 60 ){
+			window.location.hash = "#/orderDetail?OrderID=" + orderId;
+		}else if( status === 70 ){
+			window.location.hash = "#/orderDetail?OrderID=" + orderId;
+		}else{
+			return;
 		}
 	}
 	render(){
@@ -110,7 +126,7 @@ class Order extends React.Component {
 			 				</div>
 			 			</div>*/
 			 			this.state.pendingList.map( (result,index) => (
-			 				<div className="order-info" key={index}>
+			 				<div className="order-info" key={index} onClick={this.goNext.bind(this,result.CustomerState,result.OrderID)}>
 				 				<div className="if-lf">
 				 					<div className="order-title">{result.cnItemName}</div>
 				 					<div className="order-person">人数:
@@ -135,7 +151,7 @@ class Order extends React.Component {
 			 		</div>
 			 		<div className="order-list">
 			 			{this.state.tripList.map( (result,index) => (
-			 				<div className="order-info" key={index}>
+			 				<div className="order-info" key={index} onClick={this.goNext.bind(this,result.CustomerState,result.OrderID)}>
 				 				<div className="if-lf">
 				 					<div className="order-title">{result.cnItemName}</div>
 				 					<div className="order-person">人数:
@@ -159,7 +175,7 @@ class Order extends React.Component {
 			 		</div>
 			 		<div className="order-list">
 			 			{this.state.allList.map( (result,index) => (
-			 				<div className="order-info" key={index} onClick={this.goNext.bind(this,result.stateName,result.OrderID)} >
+			 				<div className="order-info" key={index} onClick={this.goNext.bind(this,result.CustomerState,result.OrderID)} >
 				 				<div className="if-lf">
 				 					<div className="order-title">{result.cnItemName}</div>
 				 					<div className="order-person">人数:
@@ -170,8 +186,10 @@ class Order extends React.Component {
 				 				</div>
 				 				<div className={ classnames('if-rt', { weitianxie : result.stateName == '未填写',
 				 														daihedui:result.stateName == '待核对',
-				 														yiqueren: result.stateName =='已确认'} )  }>
-				 					{ result.stateName == '已确认' ? <i className="fa fa-check"></i> : <i className="fa fa-ellipsis-h"></i> }
+				 														yiqueren: result.stateName =='已确认',
+				 														yijujue: result.stateName == '已拒绝',
+				 														yudingzhong:result.stateName == '预定中'} )  }>
+				 					<i className={'fa icon-face'+result.CustomerState}></i>
 				 					<span className="">{result.stateName}</span>
 				 				</div>
 				 			</div>

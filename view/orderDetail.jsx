@@ -13,6 +13,10 @@ class OrderDetail extends React.Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
+			CustomerName:'',
+			cnItemName:'',
+			SupplierCode:'',
+			CustomerTBCode:''
 		}
 	}
 	componentWillMount(){
@@ -30,7 +34,15 @@ class OrderDetail extends React.Component {
 
 			const data = response.data;
 			if( data.ErrorCode === 200 ){
+
 				document.getElementsByClassName('detail-table')[0].innerHTML = data.OrderDetail.Html;
+
+				that.setState({
+					CustomerName:data.OrderDetail.CustomerName,
+					cnItemName:data.OrderDetail.cnItemName,
+					SupplierCode:data.OrderDetail.SupplierCode,
+					CustomerTBCode:data.OrderDetail.CustomerTBCode
+				});
 			}
 			loading.hide();
 		})
@@ -38,8 +50,11 @@ class OrderDetail extends React.Component {
 
 	render(){
 
+		const pageTitle = this.state.SupplierCode + '-' + this.state.CustomerName + '-' +this.state.CustomerTBCode +'-' + this.state.cnItemName;
+
 		return(
 			 <div className="md-orderDetail">
+			 	<div className='top-user-name'>{pageTitle}</div>
 			 	<div id="onebookingorder" className="bookingorder" data-servicetype="2">
 				    <div className="orderdetailtitle" style={{textAlign:'center'}}>
 				        <span className="icon"><img src="images/dodotour_logo.png" /></span>
