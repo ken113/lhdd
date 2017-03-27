@@ -8,6 +8,7 @@ import Index from './../view/index';
 import User from './../view/user';
 import Order from './../view/order';
 import OrderDetail from './../view/orderDetail';
+import OrderAll from './../view/orderAll';
 import Visitor from './../view/visitor';
 import EditVisitor from './../view/editVisitor';
 import AddVisitor from './../view/addVisitor';
@@ -40,6 +41,14 @@ if( document.cookie.indexOf('.ASPXAUTH') === -1 ){
     window.location.hash = "#/login";
 }
 
+document.body.addEventListener("click", function(e){
+    var rqBox = document.getElementById('rqBox');
+    if( rqBox && rqBox.style.display==='block'){
+        rqBox.style.display = 'none';
+    }
+
+}, false);
+
 const router = (
 	<Router history={hashHistory }>
 		<Route path="/" component={Order}/>
@@ -47,6 +56,7 @@ const router = (
 		<Route path="user" component={User}/>
         <Route path="order" component={Order}/>
         <Route path="orderDetail" component={OrderDetail}/>
+        <Route path="orderAll" component={OrderAll}/>
         <Route path="visitor" component={Visitor}/>
         <Route path="editVisitor" component={EditVisitor}/>
         <Route path="addVisitor" component={AddVisitor}/>

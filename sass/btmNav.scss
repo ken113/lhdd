@@ -1,5 +1,5 @@
 .md-nav{
-	position: absolute;
+	position: fixed;
 	bottom:0;
 	width:100%;
 	font-size:.12rem;
@@ -9,6 +9,8 @@
 	text-align:center;
 	color:#A1A1A1;
 	border-top:1px solid #999;
+	background:#fff;
+	z-index:100;
 	background:#fff;
 
 	a{

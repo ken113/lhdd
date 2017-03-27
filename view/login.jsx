@@ -18,6 +18,13 @@ class Login extends React.Component {
 		setTimeout(function(){
 			document.getElementsByClassName('logo-form')[0].className += ' load';
 		},0);
+
+		const loginErrorTime = sessionStorage.getItem('loginErrorTime')*1;
+		if( loginErrorTime ){
+			this.setState({
+				loginErrorTime,
+			})
+		}
 	}
 	checkCode( e ){
 		const vercode = e.target.value,
@@ -31,7 +38,11 @@ class Login extends React.Component {
 
 				const data = response.data;
 				if( data.ErrorCode === 200 ){
-					iconCheck.className += ' show';
+					iconCheck.classList.remove('fa-times-circle');
+					iconCheck.className +=' fa-check-circle show';
+				}else{
+					iconCheck.classList.remove('fa-check-circle');
+					iconCheck.className += ' fa-times-circle show';
 				}
 			});
 		}else{
@@ -68,6 +79,13 @@ class Login extends React.Component {
 					loginErrorTime,
 				});
 
+				sessionStorage.setItem('loginErrorTime',loginErrorTime);
+
+				document.getElementById('password').value = '';
+				document.getElementById('vercode').value = '';
+
+				document.getElementById('vercodeImg').click();
+
 			}
 		}).catch(function (error) {
 			//modal.alert();
@@ -78,32 +96,34 @@ class Login extends React.Component {
 		const vercodeClassName = classnames('from-item', { vercode : true } );
 
 		 return(
-		 	<div className="md-login">
-		 		<div className="logo"><img src="./images/dodotour_logo.png"/></div>
-		 		<div className="logo-form">
-		 			<div className="from-item">
-		 				<span className="username">
-		 					<i className="fa fa-user"></i>
-		 					<input type="text" placeholder="请输入用户名" id="username"/>
-		 				</span>
-		 			</div>
-		 			<div className="from-item">
-		 				<span className="password">
-		 					<i className="fa fa-lock"></i>
-		 					<input type="password" placeholder="请输入密码" id="password"/>
-		 				</span>
-		 			</div>
-		 			<div className={vercodeClassName} style={{display: this.state.loginErrorTime > 2 ? 'inline-block' : 'none' }}>
-		 				<input type="text" placeholder="请输入验证码" id="vercode" onChange={this.checkCode.bind(this)}/>
-		 				<i className="icon-check fa fa-check-circle"></i>
-		 				<img src="/Users/GetValidateCode" onClick={this.changeCode.bind(this)}/>
-		 			</div>
+		 	<div className="md-login ">
+		 		<div className="login-top">
+			 		<div className="logo"><img src="./images/dodotour_logo.png"/></div>
+			 		<div className="logo-form " id="scroller">
+			 			<div className="from-item">
+			 				<span className="username">
+			 					<i className="fa fa-user"></i>
+			 					<input type="text" placeholder="请输入用户名" id="username" />
+			 				</span>
+			 			</div>
+			 			<div className="from-item">
+			 				<span className="password">
+			 					<i className="fa fa-lock"></i>
+			 					<input type="password" placeholder="请输入密码" id="password"  />
+			 				</span>
+			 			</div>
+			 			<div className={vercodeClassName} style={{display: this.state.loginErrorTime > 2 ? 'inline-block' : 'none' }}>
+			 				<input type="text" placeholder="请输入验证码" id="vercode" onChange={this.checkCode.bind(this)}/>
+			 				<i className="icon-check fa fa-check-circle"></i>
+			 				<img src="/Users/GetValidateCode" id="vercodeImg" onClick={this.changeCode.bind(this)}/>
+			 			</div>
 
-		 			<div className="login-btn">
-		 				<button onClick={this.login.bind(this)}>登录</button>
-		 			</div>
+			 			<div className="login-btn">
+			 				<button onClick={this.login.bind(this)}>登录</button>
+			 			</div>
+			 		</div>
 		 		</div>
-		 		<div className="copyright">©DoDo Tour International Travel Co., Ltd. All Rights Reserved.</div>
+		 		<div id="copyright" className="copyright login-btm"><p>©DoDo Tour International Travel Co., Ltd. All Rights Reserved.</p></div>
 		 	</div>
 		 )
 	}

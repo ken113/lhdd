@@ -72,7 +72,7 @@ class User extends React.Component {
 
 		var clipboard  = new Clipboard('.copybtn');
 		clipboard.on('success', function(e) {
-		    modal.success('复制成功！');
+		    modal.success('链接已复制，发给朋友填写！',false);
 
 		    e.clearSelection();
 		});
@@ -113,14 +113,14 @@ class User extends React.Component {
 	render(){
 
 		//debugger;
-		const copyUrl = 'http://' + window.location.host+'/wap/addVisitor.html?EncryptCustomerID='+this.state.EncryptCustomerID + '&CustomerName='+ this.state.CustomerName;
+		const copyUrl = 'http://' + window.location.host+'/wap/addVisitor.html?EncryptCustomerID='+this.state.EncryptCustomerID + '&CustomerName='+ escape( this.state.CustomerName ).replace(/%/g,'@');
 
 		return(
 			<div className="md-visitor">
 			 	{/*<TopNav title='常用游客'/>*/}
 			 	<div className="top-btn">
 			 		<Link to="addVisitor"><span className="plus"><i className="fa fa-user-plus"></i>新增常用游客</span></Link>
-			 		<a className="share copybtn" onClick={this.copyUrl.bind(this)} data-clipboard-text={copyUrl}><span className=""><i className="fa fa-share-square-o"></i>邀请朋友填写</span></a>
+			 		<a className="share copybtn" onClick={this.copyUrl.bind(this)} data-clipboard-text={'我正在为你预定旅行产品,需要你填写信息!\n'+copyUrl}><span className=""><i className="fa fa-share-square-o"></i>邀请朋友填写</span></a>
 			 	</div>
 			 	<div className="copy-url" id="copyUrl" style={{ display:'none'}}>{ copyUrl }</div>
 			 	<div className="user-list">

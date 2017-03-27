@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>编辑订单</title>
 	<link rel="stylesheet" href="order/base.min.css">
+	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 html,body{ height: 100%; }
 .md-modifyOrder{ height: 100%;overflow-y:auto;  background: #fff; padding: 0 .05rem; }
@@ -95,6 +96,10 @@ html,body{ height: 100%; }
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 
+	if( document.cookie.indexOf('.ASPXAUTH') === -1 ){
+	    window.location.hash = "#/login";
+	}
+		
 	var OrderID = getQueryString('OrderID');
 	if( OrderID ){
 		$.ajax({
@@ -112,7 +117,7 @@ jQuery(document).ready(function($) {
 				 	"baseinfo": data.OrderDetail,
 				 	"code": data.OrderDetail.CustomerTBCode,
 				 	"editFlag" :data.OrderDetail.ServiceItemHistorys.ElementsValue == null ? false : true,
-				    "imageUrl" :"imageUrl"
+				    "imageUrl" : data.OrderDetail.RQUrl
 				}),
 				document.getElementById("react1")
 			)
@@ -124,12 +129,11 @@ jQuery(document).ready(function($) {
 				 	"UIType":"edit",
 				 	"state":"editable",
 				 	"isForCusClient":false,
-				 	"unlimited":true,
+				 	"unlimited":false,
 				 	"buttons":{}
 				}),
 				document.getElementById("react2")
 			);
-
 		})
 	}
 

@@ -3,6 +3,7 @@
 	padding:0;
 	font-family:Helvetica, Tahoma, Arial, 微软雅黑, "Microsoft YaHei", sans-serif, SimSun, 宋体;
 	line-height: .2rem;
+	box-sizing: border-box;
 }
 html,body,#app{
 	height: 100%;
@@ -20,8 +21,8 @@ a{
 	left:50%;
 	top:50%;
 	width:2.4rem;
-	height: 2.4rem;
-	margin-top: -1.2rem;
+	height: 2.2rem;
+	margin-top: -1.1rem;
 	margin-left:-1.2rem;
 	border:1px solid #e8e8e8;
 	background: #fff;
@@ -105,3 +106,5 @@ a{
 	z-index: 100;
 }
 .md-loading img{ width:100%; height: 100%; }
+
+#mdatetimer{ z-index: 1000; }

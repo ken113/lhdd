@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-//import { Link } from 'react-router';
+import { Link } from 'react-router';
 //import TopNav from './topNav';
 import BtmNav from './btmNav';
 import classnames from 'classnames';
@@ -146,7 +146,7 @@ class Order extends React.Component {
 			 	</section>
 			 	<section className="order-box done">
 			 		<div className="title">
-			 			<span>已确认订单</span>
+			 			<span>我的行程</span>
 			 			<p className="line"></p>
 			 		</div>
 			 		<div className="order-list">
@@ -169,9 +169,8 @@ class Order extends React.Component {
 			 		</div>
 			 	</section>
 			 	<section className="order-box all">
-			 		<div className="title" onClick={this.showAll.bind(this)}>
-			 			<span>查看全部订单</span>
-			 			<p className="line"></p>
+			 		<div className="btn" >
+			 			<Link to="orderAll">查看我的全部订单</Link>
 			 		</div>
 			 		<div className="order-list">
 			 			{this.state.allList.map( (result,index) => (

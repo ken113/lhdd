@@ -67,6 +67,10 @@ class EditVisitor extends React.Component {
 					TravellerSex:travellers.TravellerSex ? '女' : '男',
 					TravellerDetail:travellers.TravellerDetail,
 				})
+
+				if( travellers.TravellerDetail.Height ){
+					document.getElementById('elseCheckBox').click();
+				}
 			}
 		})
 
@@ -179,8 +183,6 @@ class EditVisitor extends React.Component {
 					},1000);
 
 				}
-
-				
 			}else{
 				modal.error('修改失败');
 			}
@@ -189,6 +191,11 @@ class EditVisitor extends React.Component {
 		
 
 	}
+	calendarShow(){
+		document.getElementsByClassName('mt_mask')[0].className += ' show';
+		document.getElementById('mdatetimer').className += ' show';
+	}
+
 	render(){
 
 		return(
@@ -196,27 +203,27 @@ class EditVisitor extends React.Component {
 			 	{/*<TopNav title='修改常用游客'/>*/}
 			 	<div className="user-form">
 			 		<div className="base-info">
-			 			<h3>基本资料<span><input type="checkbox" style={{display:'none'}}/>设为本人</span></h3>
+			 			<h3>基本资料<span style={{display:'none'}}><input type="checkbox" />设为本人</span></h3>
 			 			<div className="form-item">
 			 				<label><i className="mandatory-fields">*</i>中文姓名:</label>
-			 				<input type="text" id="username" value={this.state.TravellerName} onChange={this.changeInput.bind(this)}/>
+			 				<input type="text" id="username" value={this.state.TravellerName} onChange={this.changeInput.bind(this)} placeholder="张三"/>
 			 			</div>
 			 			<div className="form-item">
 			 				<label><i className="mandatory-fields">*</i>姓名拼音:</label>
-			 				<input type="text" id="en_username" value={this.state.TravellerEnname} onChange={this.changeInput.bind(this)}/>
+			 				<input type="text" id="en_username" value={this.state.TravellerEnname} onChange={this.changeInput.bind(this)} placeholder="ZHANGSAN"/>
 			 			</div>
 			 			<div className="form-item">
 			 				<label><i className="mandatory-fields">*</i>护照号码:</label>
-			 				<input type="text" id="passport" value={this.state.PassportNo} onChange={this.changeInput.bind(this)}/>
+			 				<input type="text" id="passport" value={this.state.PassportNo} onChange={this.changeInput.bind(this)} placeholder="请输入护照号码"/>
 			 			</div>
 			 			<div className="form-item">
-			 				<label><i className="mandatory-fields">*</i>生日</label>
+			 				<label><i className="mandatory-fields">*</i>生日:</label>
 			 				<span className="calendar-box">
-			 					<input type="text" readOnly onClick={this.handleClick.bind(this)} value={convertDate(this.state.time,'YYYY-MM-DD')} onChange={this.change.bind(this)} />
+			 					<input id="brithday" type="text" readOnly  onClick={this.calendarShow.bind(this)} placeholder="选择出生日期"/>
 			 					<i className="icon-calendar fa fa-calendar"></i>
 			 				</span>
-			 				<DatePicker  theme="ios" dateFormat={this.state.dateFormat} value={this.state.time} isOpen={this.state.isOpen} 
-			 					onSelect={this.handleSelect.bind(this)} onCancel={this.handleCancel.bind(this)} />
+{/*			 				<DatePicker  theme="ios" dateFormat={this.state.dateFormat} value={this.state.time} isOpen={this.state.isOpen} 
+			 					onSelect={this.handleSelect.bind(this)} onCancel={this.handleCancel.bind(this)} />*/}
 			 			</div>
 			 			<div className="form-item">
 			 				<label>性别</label>
@@ -228,23 +235,23 @@ class EditVisitor extends React.Component {
 			 			<div className="ei-box" id="elseBox">
 			 				<div className="form-item">
 				 				<label><i className="mandatory-fields">*</i>身高:(CM)</label>
-				 				<input type="text" id="height" value={this.state.TravellerDetail.Height} onChange={this.changeInput.bind(this)}/>
+				 				<input type="text" id="height" value={this.state.TravellerDetail.Height} onChange={this.changeInput.bind(this)} placeholder="如:175"/>
 				 			</div>
 				 			<div className="form-item">
 				 				<label><i className="mandatory-fields">*</i>体重:(KG)</label>
-				 				<input type="text" id="weight" value={this.state.TravellerDetail.Weight} onChange={this.changeInput.bind(this)}/>
+				 				<input type="text" id="weight" value={this.state.TravellerDetail.Weight} onChange={this.changeInput.bind(this)} placeholder="如:65"/>
 				 			</div>
 				 			<div className="form-item">
 				 				<label><i className="mandatory-fields">*</i>鞋子码数:</label>
-				 				<input type="text" id="shoesSize" value={this.state.TravellerDetail.ShoesSize} onChange={this.changeInput.bind(this)}/>
+				 				<input type="text" id="shoesSize" value={this.state.TravellerDetail.ShoesSize} onChange={this.changeInput.bind(this)} placeholder="如:43"/>
 				 			</div>
 				 			<div className="form-item">
 				 				<label>衣服码数:</label>
-				 				<input type="text" id="clothesSize" value={this.state.TravellerDetail.ClothesSize} onChange={this.changeInput.bind(this)}/>
+				 				<input type="text" id="clothesSize" value={this.state.TravellerDetail.ClothesSize} onChange={this.changeInput.bind(this)} placeholder="如:XL"/>
 				 			</div>
 				 			<div className="form-item">
 				 				<label>近视度数:</label>
-				 				<input type="text" id="glassesNum" value={this.state.TravellerDetail.GlassesNum} onChange={this.changeInput.bind(this)}/>
+				 				<input type="text" id="glassesNum" value={this.state.TravellerDetail.GlassesNum} onChange={this.changeInput.bind(this)} placeholder="如:200"/>
 				 			</div>
 			 			</div>
 			 		</div>

@@ -113,11 +113,11 @@ $(function(){
 		CustomerName = getQueryString('CustomerName');
 
 	if( CustomerName ){
-		$('.tips-msg span').text( CustomerName );
+		$('.tips-msg span').text( unescape( CustomerName.replace(/@/g,'%') ) );
 	}
 
 	var years = [];
-	for(var i = 1970;i<2020;i++){
+	for(var i = 1930;i<2018;i++){
 		years.push( i );
 	}
 
@@ -125,7 +125,7 @@ $(function(){
         mode : 1, //时间选择器模式 
         format : 2, //时间格式化方式 
         years : years, //年份数组 
-        nowbtn : true //是否显示现在按钮 
+        nowbtn : false //是否显示现在按钮 
 	});	
 
 	$('button.submit').click( function(){

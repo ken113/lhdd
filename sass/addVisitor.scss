@@ -1,13 +1,13 @@
 .md-addVisitor{
 
 	height:calc( 100% - .5rem );
-	overflow-y: auto;
+	overflow: auto;
     //margin-top: .4rem;
     height: 100%;
 
 	.add-form{
 		margin:.2rem;
-
+		overflow: auto;
 		.tips-msg{ margin-bottom:.2rem; }
 		.form-item{
 			margin: .05rem 0;
@@ -18,7 +18,7 @@
 				line-height: .24rem;
 			}
 
-			input[type=text]{
+			input[type='text'],select,input[type='date']{
 				display: inline-block;
 				width:100%;
 				height: .28rem;
