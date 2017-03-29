@@ -18,7 +18,7 @@ class ModifyPwd extends React.Component {
 		}
 	}
 	componentWillMount(){
-		setTitle('修改密码');
+		setTitle('修改密码-个人中心-浪花朵朵');
 	}
 	componentDidMount(){
 		setTimeout(function(){
@@ -39,16 +39,16 @@ class ModifyPwd extends React.Component {
 			newPassword2 = that.state.newPassword2;
 
 		if( oldPassword === '' ){
-			modal.alert('旧密码不能为空');
+			modal.error('旧密码不能为空');
 			return;
 		}else if( newPassword === '' ){
-			modal.alert('新密码不能为空');
+			modal.error('新密码不能为空');
 			return;
 		}else if( newPassword2 === '' ){
-			modal.alert('再次新密码不能为空');
+			modal.error('再次新密码不能为空');
 			return;
 		}else if( newPassword2 !== newPassword ){
-			modal.alert('2次密码输入不同');
+			modal.error('2次密码输入不同');
 			return;
 		}
 		axios.post('/Users/EditPassword',{

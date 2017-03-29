@@ -19,7 +19,12 @@ class Order extends React.Component {
 		}
 	}
 	componentWillMount(){
-		setTitle( '我的订单' );
+		setTitle( '行程-浪花朵朵' );
+		const badDatePicker = sessionStorage.getItem('badDatePicker');
+		if( badDatePicker ){
+			sessionStorage.removeItem('badDatePicker');
+			window.location.reload();
+		}
 	}
 	componentDidMount(){
 
@@ -135,8 +140,7 @@ class Order extends React.Component {
 				 						<span><em>{result.INFNum}</em>婴儿</span>
 				 					</div>
 				 				</div>
-				 				<div className={ classnames('if-rt', { weitianxie : result.stateName == '未填写',
-				 														daihedui:result.stateName == '待核对'} )  }>
+				 				<div className={ 'if-rt status-' + result.CustomerState }>
 				 					<i className="fa fa-ellipsis-h"></i>
 				 					<span className="">{result.stateName}</span>
 				 				</div>
@@ -160,8 +164,8 @@ class Order extends React.Component {
 				 						<span><em>{result.INFNum}</em>婴儿</span>
 				 					</div>
 				 				</div>
-				 				<div className="if-rt yiqueren">
-				 					<i className="fa fa-check"></i>
+				 				<div className={ 'if-rt status-' + result.CustomerState }>
+				 					<i className={'fa icon-face'+result.CustomerState}></i>
 				 					<span className="">{result.stateName}</span>
 				 				</div>
 				 			</div>
@@ -170,7 +174,8 @@ class Order extends React.Component {
 			 	</section>
 			 	<section className="order-box all">
 			 		<div className="btn" >
-			 			<Link to="orderAll">查看我的全部订单</Link>
+			 			{/*<Link to="orderAll">查看我的全部订单</Link>*/}
+			 			<a href="http://my.dodotour.cn/Orders/allOrder" >查看我的全部订单</a>
 			 		</div>
 			 		<div className="order-list">
 			 			{this.state.allList.map( (result,index) => (
@@ -183,11 +188,7 @@ class Order extends React.Component {
 				 						<span><em>{result.INFNum}</em>婴儿</span>
 				 					</div>
 				 				</div>
-				 				<div className={ classnames('if-rt', { weitianxie : result.stateName == '未填写',
-				 														daihedui:result.stateName == '待核对',
-				 														yiqueren: result.stateName =='已确认',
-				 														yijujue: result.stateName == '已拒绝',
-				 														yudingzhong:result.stateName == '预定中'} )  }>
+				 				<div className={ 'if-rt status-' + result.CustomerState }>
 				 					<i className={'fa icon-face'+result.CustomerState}></i>
 				 					<span className="">{result.stateName}</span>
 				 				</div>

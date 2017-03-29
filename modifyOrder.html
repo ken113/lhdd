@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta name="format-detection" content="telephone=no">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>编辑订单</title>
+	<title>订单填写-订单-浪花朵朵</title>
 	<link rel="stylesheet" href="order/base.min.css">
 	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
 <style type="text/css">
@@ -43,11 +43,11 @@ html,body{ height: 100%; }
 	            </div>
 	        </div>
 	    </div>
-	    <div class="" style="text-align:center;    margin-bottom: .6rem;">
+	    <div class="" style="text-align:center; margin-bottom: .1rem;">
 	        <a data-iscommit="false" id="nowsave" class="save-button btn btn-sm btn-default"> 暂存，稍后继续填写</a>
 	        <a data-iscommit="true" id="confirmsave" class="save-button btn btn-sm btn-primary button70"> 提交保存</a>
 	    </div>
-		<div class="md-nav">
+		<div class="md-nav" style="display: none;">
 			<a href="/wap/dist/#/order" class="selected">
 				<div class="nav-item item-trip">
 					<i class="fa fa-paper-plane"></i>
@@ -128,12 +128,17 @@ jQuery(document).ready(function($) {
 				 	"initdata": data.OrderDetail,//api get
 				 	"UIType":"edit",
 				 	"state":"editable",
-				 	"isForCusClient":false,
+				 	"isForCusClient":true,
 				 	"unlimited":false,
 				 	"buttons":{}
 				}),
 				document.getElementById("react2")
 			);
+
+
+			if( data.OrderDetail.state ){
+				$('#nowsave').hide();
+			}
 		})
 	}
 

@@ -5,6 +5,7 @@ import axios from 'axios';
 //import TopNav from './topNav';
 import BtmNav from './btmNav';
 import touch from 'touchjs';
+//import DatePicker from './../component/DatePicker';
 
 import { convertDate,modal,setTitle,loading } from './../lib/common';
 
@@ -20,10 +21,15 @@ class User extends React.Component {
 		}
 	}
 	componentWillMount(){
-		setTitle( '常用游客' );
+		setTitle( '常用游客-浪花朵朵' );
+		const badDatePicker = sessionStorage.getItem('badDatePicker');
+		if( badDatePicker ){
+			sessionStorage.removeItem('badDatePicker');
+			window.location.reload();
+		}
 	}
 	componentDidMount(){
-		
+
 		const that = this;
 		loading.show();
 		axios.post('/Users/GetUserInfo',{
@@ -68,17 +74,35 @@ class User extends React.Component {
 			    	target.parentNode.parentNode.parentNode.parentNode.classList.remove('left');
 			    }
 			});
+
+			/*touch.on('.md-visitor', 'swipeup', function(ev){
+				//debugger;
+				const wrap = document.getElementsByClassName('md-visitor')[0];
+				//wrap.scrollTop += 200;
+			});
+			touch.on('.md-visitor', 'swipedown', function(ev){
+				//debugger;
+				const wrap = document.getElementsByClassName('md-visitor')[0];
+				//wrap.scrollTop -= 200;
+			});*/
+
 		})
 
 		var clipboard  = new Clipboard('.copybtn');
 		clipboard.on('success', function(e) {
-		    modal.success('链接已复制，发给朋友填写！',false);
+		    //modal.success('链接已复制，发给朋友填写！',false);
+		    document.getElementsByClassName('copy-msg-tips')[0].className += ' show';
+
+		    setTimeout(function(){
+		    	 document.getElementsByClassName('copy-msg-tips')[0].className = 'copy-msg-tips';
+		    },1200);
 
 		    e.clearSelection();
+
 		});
 
 		clipboard.on('error', function(e) {
-		     modal.error('复制失败，推荐使用微信浏览器');
+		    modal.error('复制失败，推荐使用微信浏览器');
 		});
 	}
 	deleteUser(e){
@@ -113,7 +137,7 @@ class User extends React.Component {
 	render(){
 
 		//debugger;
-		const copyUrl = 'http://' + window.location.host+'/wap/addVisitor.html?EncryptCustomerID='+this.state.EncryptCustomerID + '&CustomerName='+ escape( this.state.CustomerName ).replace(/%/g,'@');
+		const copyUrl = 'http://' + window.location.host+'/wap/addVisitor.html?EncryptCustomerID='+this.state.EncryptCustomerID;
 
 		return(
 			<div className="md-visitor">
@@ -123,6 +147,7 @@ class User extends React.Component {
 			 		<a className="share copybtn" onClick={this.copyUrl.bind(this)} data-clipboard-text={'我正在为你预定旅行产品,需要你填写信息!\n'+copyUrl}><span className=""><i className="fa fa-share-square-o"></i>邀请朋友填写</span></a>
 			 	</div>
 			 	<div className="copy-url" id="copyUrl" style={{ display:'none'}}>{ copyUrl }</div>
+			 	<div className="copy-msg-tips">链接已复制，发给朋友填写！</div>
 			 	<div className="user-list">
 			 		{/*<Link to="/editVisitor">
 				 		<div className="user-box">
@@ -158,6 +183,7 @@ class User extends React.Component {
 					))}
 			 	</div>
 			 	<BtmNav/>
+			 	{/*<DatePicker/>*/}
 			 </div>
 		 )
 	}

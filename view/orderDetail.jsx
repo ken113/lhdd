@@ -16,11 +16,12 @@ class OrderDetail extends React.Component {
 			CustomerName:'',
 			cnItemName:'',
 			SupplierCode:'',
-			CustomerTBCode:''
+			CustomerTBCode:'',
+			SupplierEnName:'   ',
 		}
 	}
 	componentWillMount(){
-		setTitle( '订单详情' );
+		setTitle( '订单详情-行程-浪花朵朵' );
 	}
 	componentDidMount(){
 		setTimeout(function(){
@@ -41,7 +42,8 @@ class OrderDetail extends React.Component {
 					CustomerName:data.OrderDetail.CustomerName,
 					cnItemName:data.OrderDetail.cnItemName,
 					SupplierCode:data.OrderDetail.SupplierCode,
-					CustomerTBCode:data.OrderDetail.CustomerTBCode
+					CustomerTBCode:data.OrderDetail.CustomerTBCode,
+					SupplierEnName:data.OrderDetail.SupplierEnName,
 				});
 			}
 			loading.hide();
@@ -74,7 +76,7 @@ class OrderDetail extends React.Component {
 				            <div className="line-vertical"></div>
 				        </div>
 				        <div className="right">
-				            产品服务信息：本产品由 dodotour 提供服务，本公司不是组团社，仅代游客进行预订，一切责任由提供产品的当地旅游经营者承担。
+				            产品服务信息：本产品由&nbsp;{this.state.SupplierEnName}&nbsp;提供服务，本公司不是组团社，仅代游客进行预订，一切责任由提供产品的当地旅游经营者承担。
 				        </div>
 				    </div>
 				</div>

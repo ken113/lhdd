@@ -46,7 +46,6 @@ document.body.addEventListener("click", function(e){
     if( rqBox && rqBox.style.display==='block'){
         rqBox.style.display = 'none';
     }
-
 }, false);
 
 const router = (

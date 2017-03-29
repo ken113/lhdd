@@ -17,7 +17,7 @@ class OrderAll extends React.Component {
 		}
 	}
 	componentWillMount(){
-		setTitle( '我的全部订单' );
+		setTitle( '我的全部订单-行程-浪花朵朵' );
 	}
 	componentDidMount(){
 
@@ -80,11 +80,7 @@ class OrderAll extends React.Component {
 				 						<span><em>{result.INFNum}</em>婴儿</span>
 				 					</div>
 				 				</div>
-				 				<div className={ classnames('if-rt', { weitianxie : result.stateName == '未填写',
-				 														daihedui:result.stateName == '待核对',
-				 														yiqueren: result.stateName =='已确认',
-				 														yijujue: result.stateName == '已拒绝',
-				 														yudingzhong:result.stateName == '预定中'} )  }>
+				 				<div className={ 'if-rt status-' + result.CustomerState }>
 				 					<i className={'fa icon-face'+result.CustomerState}></i>
 				 					<span className="">{result.stateName}</span>
 				 				</div>

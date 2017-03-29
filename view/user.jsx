@@ -22,7 +22,7 @@ class User extends React.Component {
 		}
 	}
 	componentWillMount(){
-		setTitle( '个人中心');
+		setTitle( '个人中心-浪花朵朵');
 	}
 	componentDidMount(){
 

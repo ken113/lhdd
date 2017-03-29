@@ -108,15 +108,26 @@
 		}
 	}
 }
-.icon-face0:before{ content:'\F141'} //未填写
-.icon-face10:before{ content:'\F119' } //已拒绝
-.icon-face20:before{ content:'\F141' } //待核对
-.icon-face30:before{ content:'\F141' } //已核对
-.icon-face40:before{ content:'\f017' } //预定中
-.icon-face50:before{ content:'\F141' } //变更中
-.icon-face60:before{ content:'\F141' } //取消中
-.icon-face70:before{ content:'\f00c';} //已确认
-.icon-face80:before{ content:'\F141' } //已取消
+
+.if-rt.status-0{ background:#fffccc; }
+.if-rt.status-10{ background:#ffccff; }
+.if-rt.status-20{ background:#FFCC00; }
+.if-rt.status-30{ background:#00ff00; }
+.if-rt.status-40{ background:#66ffcc; }
+.if-rt.status-50{ background:#66ffcc; }
+.if-rt.status-60{ background:#66ffcc; }
+.if-rt.status-70{ background:#2E9DE6; color:#fff !important;}
+.if-rt.status-80{ background:#c9c9c9; }
+
+.icon-face0:before{ content:'\F141';  } //未填写
+.icon-face10:before{ content:'\F119'; } //已拒绝
+.icon-face20:before{ content:'\F141'; } //待核对
+.icon-face30:before{ content:'\F141'; } //已核对
+.icon-face40:before{ content:'\f017'; } //预定中
+.icon-face50:before{ content:'\f017'; } //变更中
+.icon-face60:before{ content:'\F141'; } //取消中
+.icon-face70:before{ content:'\f00c'; } //已确认
+.icon-face80:before{ content:'\F141'; } //已取消
 
 .order-box.all .btn{ text-align:center;}
 .order-box.all .btn a{

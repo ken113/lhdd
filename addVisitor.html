@@ -9,18 +9,21 @@
 	<link rel="stylesheet" href="css/font-awesome.css">
 	<style type="text/css">
 		*{margin:0;padding:0;}
-		html,body,#app{height: 100%;width:100%;font-size: .14rem;}
+		html,body,#app{height: 100%;width:100%;font-size: .14rem;color:#333;}
 		.page-addVisitor{ display: block; }
 		.page-addVisitor .tips-msg{ color:#000; height: .5rem;line-height: .5rem; padding:0 .2rem; font-size: .16rem; border-bottom: 1px solid #666; }
 		.page-addVisitor .form-item{ margin:.05rem .2rem; }
 		.page-addVisitor .form-item label{display: inline-block;width:100%;height: .24rem;line-height: .24rem;}
-		.page-addVisitor .form-item input[type=text]{display: inline-block;width:100%;height: .28rem;line-height: .28rem;font-size: .14rem; text-indent: .1rem; }
+		.page-addVisitor .form-item input[type=text],.page-addVisitor .form-item select{display: inline-block;width:100%;height: .28rem;line-height: .28rem;font-size: .14rem; text-indent: .1rem; }
+		.page-addVisitor .form-item .calendar-box{position: relative;display: inline-block;width: 100%;height: .28rem; font-size: .18rem; }
+		.page-addVisitor .add-form .form-item .icon-calendar{color: #2E9DE6; position: absolute;right: .1rem;top: .06rem;}
 		.page-addVisitor .btm-btn{  text-align: center;margin: .2rem; margin-bottom: .1rem; }
 		.page-addVisitor .btm-btn button{display: inline-block;width:100%;height: .34rem;line-height: .34rem;color:#fff;background: #2E9DE6;border-radius: 5px;outline:none;border:0;}
 		.page-addVisitor .btm-tips{ text-align: center; }
+		.mandatory-fields {color: #ff0000 !important; padding-right: 3px;font-style: normal;}
 		.page-success{ display: none; }
 		.page-success .icon-success{ text-align: center; margin:.3rem auto; margin-bottom: .15rem; }
-		.page-success .icon-success i{ font-size: 1rem; color:#2E9DE6; }
+		.page-success .icon-success i{ font-size: 1rem; color:#44b549; }
 		.page-success .tips-title{ text-align: center; font-size: .18rem;  }
 		.page-success .tips-tips{ text-align: center; font-size: .14rem;  }
 		.page-success .changyong{ margin:.2rem; }
@@ -39,24 +42,31 @@
  		<div class="add-form">
  			<div class="tips-msg"><span>您好友</span>的常用游客</div>
  			<div class="form-item">
- 				<label>中文姓名:</label>
- 				<input type="text" name="TravellerName"/>
+ 				<label><i class="mandatory-fields">*</i>中文姓名:</label>
+ 				<input type="text" name="TravellerName" placeholder="张三"/>
  			</div>
  			<div class="form-item">
- 				<label>姓名拼音:</label>
- 				<input type="text"  name="TravellerEnname"/>
+ 				<label><i class="mandatory-fields">*</i>姓名拼音:</label>
+ 				<input type="text"  name="TravellerEnname" placeholder="ZHANGSAN" onchange="changeEnname()"/>
  			</div>
  			<div class="form-item">
- 				<label>护照号码:</label>
- 				<input type="text"  name="PassportNo"/>
+ 				<label><i class="mandatory-fields">*</i>护照号码:</label>
+ 				<input type="text" name="PassportNo" placeholder="请填写护照号码"/>
  			</div>
  			<div class="form-item">
- 				<label>生日:</label>
- 				<input type="text" name="Birthday" readonly="readonly" id="in"/>
+ 				<label><i class="mandatory-fields">*</i>生日:</label>
+ 				<span class="calendar-box">
+ 					<input type="text" name="Birthday" readonly="readonly" id="in" placeholder="请选择生日"/>
+ 					<i class="icon-calendar fa fa-calendar"></i>
+ 				</span>
  			</div>
  			<div class="form-item">
  				<label>性别:</label>
- 				<input type="text" value="男" readyOnly name="TravellerSex" onClick='changeSex()'/>
+ 				<!-- <input type="text" value="男" readyOnly name="TravellerSex" onClick='changeSex()'/> -->
+ 				<select id="sex" name="TravellerSex">
+ 					<option value="男">男</option>
+ 					<option value="女">女</option>
+ 				</select>
  			</div>
  		</div>
  		<div class="btm-btn">
@@ -107,14 +117,13 @@
     doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
 
+function changeEnname(){
+	var enname = $('[name=TravellerEnname]').val();
+	$('[name=TravellerEnname]').val( enname.toLocaleUpperCase() );
+}
 $(function(){
 
-	var EncryptCustomerID = getQueryString('EncryptCustomerID'),
-		CustomerName = getQueryString('CustomerName');
-
-	if( CustomerName ){
-		$('.tips-msg span').text( unescape( CustomerName.replace(/@/g,'%') ) );
-	}
+	var EncryptCustomerID = getQueryString('EncryptCustomerID');
 
 	var years = [];
 	for(var i = 1930;i<2018;i++){
@@ -128,6 +137,18 @@ $(function(){
         nowbtn : false //是否显示现在按钮 
 	});	
 
+	$.ajax({
+		url:'/Users/GetUserName',
+		type:'post',
+		dataType:'json',
+		data:{
+			EncryptCustomerID:EncryptCustomerID,
+		},
+		success:function( data ){
+			$('.tips-msg span').text( data.UserName );
+		}
+	});
+
 	$('button.submit').click( function(){
 
 		var TravellerName = $('[name=TravellerName]').val(),
@@ -139,15 +160,27 @@ $(function(){
 			alert('请填写中文姓名');
 			return;
 		}
+		if( !/^[\u4E00-\u9FA5\uF900-\uFA2D]+$/.test( TravellerName ) ){
+			alert('中文姓名填写有误');
+			return;
+		}
 		if( !TravellerEnname ){
 			alert('请填写英文姓名');
 			return;
 		}
-		if( !TravellerName ){
+		if( !/^[A-Za-z]+$/.test( TravellerEnname ) ){
+			alert('英文姓名填写有误');
+			return;
+		}
+		if( !PassportNo ){
 			alert('请填写护照号码');
 			return;
 		}
-		if( !TravellerName ){
+		if( !/^[0-9a-zA-Z]*$/.test( PassportNo ) ){
+			alert('护照号码填写有误');
+			return;
+		}
+		if( !Birthday ){
 			alert('请填写生日');
 			return;
 		}
@@ -169,7 +202,9 @@ $(function(){
 				if( data.ErrorCode === 200 ){
 					//debugger;
 					var userlist = sessionStorage.getItem('userlist') || '';
-					var newList = userlist.split(',');
+					var newList = userlist.split(',').filter(function( item ){
+						return item != '';
+					});
 					newList.push( TravellerName );
 					sessionStorage.setItem( 'userlist',newList.join(',') );
 
@@ -179,10 +214,11 @@ $(function(){
 					var html = '';
 					$.each( newList,function(index,item ){
 						html += '<div class="user-item"><span class="user-name">'+ item +'</span><span class="user-status">已提交</span></div>'
+						
 					});
 					$('.list-user').html( html );
 
-					if( newList.length > 0 ){
+					if( newList.length > 9 ){
 						$('button.add').hide();
 					}
 
