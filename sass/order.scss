@@ -48,12 +48,23 @@
 
 			.order-info{
 
-				overflow: hidden;
+				//overflow: hidden;
 				background:#fff;
 				height: .9rem;
 				margin-top: .1rem;
-				border-radius: 5px;
+				//border-radius: 5px;
+				position:relative;
 
+				&:before{
+				    content: '';
+				    position: absolute;
+				    display: inline-block;
+				    height: .1rem;
+				    width: .1rem;
+				    border-left: 2px solid #333;
+				    top: -.1rem;
+				    left: .5rem;
+				}
 				.if-lf{
 					float:left;
 					width:2.4rem;
@@ -65,6 +76,10 @@
 						line-height:.45rem;
 						color:#111;
 						font-weight: 600;
+						overflow: hidden;
+					    text-overflow: ellipsis;
+					    vertical-align: middle;
+					    width: 100%;
 					}
 					.order-person{
 						height: .45rem;
@@ -88,6 +103,7 @@
 					display: flex;
 					justify-content: center;
 					flex-direction: column;
+					border-radius: 0 5px 5px 0;
 					i{
 						font-size: .2rem;
 					}
@@ -106,6 +122,19 @@
 			}
 
 		}
+	}
+}
+.order-container{
+	margin-top:.15rem;
+
+	.order-date{
+		width:1.18rem;
+		height: .3rem;
+		line-height: .3rem;
+		text-align: center;
+		border-radius:10px;
+		border:1px solid #999;
+		background:#fff;
 	}
 }
 

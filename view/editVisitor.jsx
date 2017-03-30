@@ -142,6 +142,7 @@ class EditVisitor extends React.Component {
 			TravellerEnname:document.getElementById('en_username').value.toLocaleUpperCase().trim(),
 			TravellerName:document.getElementById('username').value.trim(),
 			PassportNo:document.getElementById('passport').value.trim(),
+			Birthday:document.getElementById('brithday').value.trim(),
 			TravellerDetail:{
 				Height:document.getElementById('height').value.trim(),
 				ClothesSize:document.getElementById('clothesSize').value.toLocaleUpperCase().trim(),
@@ -263,7 +264,7 @@ class EditVisitor extends React.Component {
 			TravellerName:that.state.TravellerName,
 			TravellerEnname:that.state.TravellerEnname,
 			PassportNo:that.state.PassportNo,
-			Birthday:that.state.Birthday,
+			Birthday:document.getElementById('brithday').value.trim(),
 			TravellerSex: document.getElementById('sex').value === '男' ? 0 : 1
 		}).then(function (response) {
 
@@ -300,7 +301,7 @@ class EditVisitor extends React.Component {
 
 				}
 			}else{
-				modal.error('修改失败');
+				modal.error( data.ErrorMessage );
 			}
 		})
 	}
