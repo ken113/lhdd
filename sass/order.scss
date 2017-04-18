@@ -7,7 +7,16 @@
 	//margin-top:.4rem;
 
 	.order-box.all{ margin-bottom:.6rem; }
-
+	.order-box.done .order-info:before{
+		content: '';
+	    position: absolute;
+	    display: inline-block;
+	    height: .1rem;
+	    width: .1rem;
+	    border-left: 2px solid #333;
+	    top: -.1rem;
+	    left: .3rem;
+	}
 	.order-box{
 
 		margin:.2rem .1rem;
@@ -55,19 +64,9 @@
 				//border-radius: 5px;
 				position:relative;
 
-				&:before{
-				    content: '';
-				    position: absolute;
-				    display: inline-block;
-				    height: .1rem;
-				    width: .1rem;
-				    border-left: 2px solid #333;
-				    top: -.1rem;
-				    left: .5rem;
-				}
 				.if-lf{
 					float:left;
-					width:2.4rem;
+					width:2.5rem;
 					padding-left: .1rem;
 					font-size: .15rem;
 
@@ -105,7 +104,7 @@
 					flex-direction: column;
 					border-radius: 0 5px 5px 0;
 					i{
-						font-size: .2rem;
+						font-size: .35rem;
 					}
 					span{
 						display: inline-block;
@@ -154,7 +153,7 @@
 .icon-face30:before{ content:'\F141'; } //已核对
 .icon-face40:before{ content:'\f017'; } //预定中
 .icon-face50:before{ content:'\f017'; } //变更中
-.icon-face60:before{ content:'\F141'; } //取消中
+.icon-face60:before{ content:'\f017'; } //取消中
 .icon-face70:before{ content:'\f00c'; } //已确认
 .icon-face80:before{ content:'\F141'; } //已取消
 

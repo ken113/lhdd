@@ -60,8 +60,10 @@ class ModifyPwd extends React.Component {
 			const data = response.data;
 			if( data.ErrorCode === 200 ){
 				modal.success('修改成功');
+				window.location.hash = "#/login";
 				setTimeout(function(){
 					document.getElementById('md-modal-success').classList.remove('show');
+					document.getElementById('masker').style.display = 'none';
 					window.location.hash = "#/login";
 				},1000);
 			}else{

@@ -112,9 +112,13 @@ class ModifyUser extends React.Component {
 			if( data.ErrorCode === 200 ){
 				modal.success('修改成功');
 				setTimeout(function(){
-					document.getElementById('md-modal-success').classList.remove('show');
+					document.getElementById('masker').style.display = 'none';
+					if( document.getElementById('md-modal-success') ){
+						document.getElementById('md-modal-success').classList.remove('show');
+					}
+					
 					window.location.hash = "#/user";
-				},1000);
+				},1200);
 			}else{
 				modal.error('修改失败');
 			}

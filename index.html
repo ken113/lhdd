@@ -18,5 +18,17 @@
 	<script src="/wap/lib/clipboard.min.js"></script>
 	<script src="/wap/lib/zepto.min.js"></script>
 	<script src="/wap/mdater/zepto.mdatetimer.js"></script>
+	<script type="text/javascript">
+		
+		var allOrderUrl = 'http://my.dodotour.cn/Orders/allOrder',
+			url = window.location.href;
+		if( url.indexOf('test') > -1 ){
+			allOrderUrl = 'http://m.test.dodotour.cn/Orders/allOrder';
+		}
+		if( url.indexOf('localhost') > -1 ){
+			allOrderUrl = 'http://' + window.location.hostname + ':' + window.location.port + '/Orders/allOrder';
+		}
+
+	</script>
 </body>
 </html>

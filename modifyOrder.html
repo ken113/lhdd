@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 html,body{ height: 100%; }
+body{ padding-bottom: 0px; }
 .md-modifyOrder{ height: 100%;overflow-y:auto;  background: #fff; padding: 0 .05rem; }
 .md-nav{position: absolute;bottom:0;width:100%;font-size:.12rem;color:#1E1E1E;height:.5rem;overflow:hidden;text-align:center;color:#A1A1A1;border-top:1px solid #999;background:#fff;}
 .md-nav a{ color:#A1A1A1; }
@@ -37,7 +38,7 @@ html,body{ height: 100%; }
 	        <div style="max-width:440px;display:inline-block;position:relative">
 	            <div class="checkbox">
 	                <label style="text-align:left">
-		                <input type="checkbox" id="agreed">
+		                <input type="checkbox" id="agreed" checked="false">
 		                我已打开并阅读《<a target="_blank" href="http://www.dodotour.net/fengxian.html">旅游风险须知和安全提示告知书</a>》，我承诺转达全部内容给全体参与以上行程的人员，并代表他们进行签字。
 		            </label>
 	            </div>
@@ -111,34 +112,39 @@ jQuery(document).ready(function($) {
 			}
 		}).done(function( data ){
 
-			ReactDOM.render(
-				React.createElement(Components.UserInfo,
-				{
-				 	"baseinfo": data.OrderDetail,
-				 	"code": data.OrderDetail.CustomerTBCode,
-				 	"editFlag" :data.OrderDetail.ServiceItemHistorys.ElementsValue == null ? false : true,
-				    "imageUrl" : data.OrderDetail.RQUrl
-				}),
-				document.getElementById("react1")
-			)
+			if( data.ErrorCode === 200 ){
+				ReactDOM.render(
+					React.createElement(Components.UserInfo,
+					{
+					 	"baseinfo": data.OrderDetail,
+					 	"code": data.OrderDetail.CustomerTBCode,
+					 	"editFlag" :data.OrderDetail.ServiceItemHistorys.ElementsValue == null ? false : true,
+					    "imageUrl" : data.OrderDetail.RQUrl
+					}),
+					document.getElementById("react1")
+				)
 
-			ReactDOM.render(
-				React.createElement(Components.Orders,
-				{
-				 	"initdata": data.OrderDetail,//api get
-				 	"UIType":"edit",
-				 	"state":"editable",
-				 	"isForCusClient":true,
-				 	"unlimited":false,
-				 	"buttons":{}
-				}),
-				document.getElementById("react2")
-			);
+				ReactDOM.render(
+					React.createElement(Components.Orders,
+					{
+					 	"initdata": data.OrderDetail,//api get
+					 	"UIType":"edit",
+					 	"state":"editable",
+					 	"isForCusClient":true,
+					 	"unlimited":false,
+					 	"buttons":{}
+					}),
+					document.getElementById("react2")
+				);
 
 
-			if( data.OrderDetail.state ){
-				$('#nowsave').hide();
+				if( data.OrderDetail.state ){
+					$('#nowsave').hide();
+				}
+			}else{
+				alert( data.ErrorMessage);
 			}
+			
 		})
 	}
 

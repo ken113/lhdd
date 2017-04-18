@@ -39,8 +39,10 @@ class User extends React.Component {
 			
 			if( data.ErrorCode === 200 ){
 
+				let tl = data.UserInfo.Travellers || [];
+				
 				that.setState({
-					travellersList: [ ...data.UserInfo.Travellers ],
+					travellersList: [ ...tl ],
 					CustomerID:data.UserInfo.CustomerID,
 					CustomerName:data.UserInfo.CustomerName,
 					EncryptCustomerID:data.UserInfo.EncryptCustomerID
@@ -50,9 +52,9 @@ class User extends React.Component {
 			}
 
 			touch.on('.user-box', 'swipeleft', function(ev){
-				//ev.startRotate();
-			    //ev.originEvent.preventDefault(); 
-			    //ev.originEvent.stopPropagation(); 
+				ev.startRotate();
+			    ev.originEvent.preventDefault(); 
+			    ev.originEvent.stopPropagation(); 
 			    let target = ev.target;
 			    if( target.tagName === 'DIV' ){
 			    	target.parentNode.parentNode.parentNode.className = 'user-wrap left';
@@ -63,9 +65,9 @@ class User extends React.Component {
 
 			});
 			touch.on('.user-box', 'swiperight', function(ev){
-				//ev.startRotate();
-			    //ev.originEvent.preventDefault(); 
-			    //ev.originEvent.stopPropagation(); 
+				ev.startRotate();
+			    ev.originEvent.preventDefault(); 
+			    ev.originEvent.stopPropagation(); 
 			    let target = ev.target;
 			    //debugger;
 			    if( target.tagName === 'DIV' ){

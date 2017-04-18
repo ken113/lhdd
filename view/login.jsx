@@ -63,6 +63,7 @@ class Login extends React.Component {
 	}
 	changeCode( e ){
 		e.target.src = '/Users/GetValidateCode?t=?'+ +new Date();
+		document.getElementById('vercode').value = '';
 	}
 	login(){
 
@@ -90,6 +91,7 @@ class Login extends React.Component {
 
 				document.getElementById('vercodeImg').click();
 
+				document.getElementsByClassName('icon-check')[0].classList.remove('show');
 			}
 
 		}).catch(function (error) {

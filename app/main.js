@@ -45,6 +45,15 @@ document.body.addEventListener("click", function(e){
     var rqBox = document.getElementById('rqBox');
     if( rqBox && rqBox.style.display==='block'){
         rqBox.style.display = 'none';
+        document.getElementById('masker').style.display = 'none';
+    }
+}, false);
+
+document.getElementById('masker').addEventListener("click", function(e){
+    var rqBox = document.getElementById('rqBox');
+    if( rqBox && rqBox.style.display==='block'){
+        rqBox.style.display = 'none';
+        document.getElementById('masker').style.display = 'none';
     }
 }, false);
 

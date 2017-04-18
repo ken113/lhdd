@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Link } from 'react-router';
-//import DatePicker from 'react-mobile-datepicker';
+import DatePicker from 'react-mobile-datepicker';
 import { convertDate,modal,setTitle } from './../lib/common';
 import axios from 'axios';
 //import TopNav from './topNav';
@@ -46,6 +46,8 @@ class AddVisitor extends React.Component {
 		for(var i = 1930;i<2018;i++){
 			years.push( i );
 		}
+
+		$("#mdatetimer").remove();
 		$('#brithday').mdatetimer({ 
 	        mode : 1, //时间选择器模式 
 	        format : 2, //时间格式化方式 
@@ -53,7 +55,16 @@ class AddVisitor extends React.Component {
 	        nowbtn : false //是否显示现在按钮 
 		});
 
-		sessionStorage.setItem('badDatePicker','xxxxxxx');
+		//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+		//sessionStorage.setItem('badDatePicker','xxxxxxx');
+		setTimeout(function(){
+			document.getElementsByClassName('mt_panel')[0].addEventListener('touchend', function(e){
+		          //this.style.display='none';
+		          e.preventDefault();
+		    });
+
+		},0);
 
 		var clipboard  = new Clipboard('.copybtn');
 		clipboard.on('success', function(e) {
@@ -101,7 +112,8 @@ class AddVisitor extends React.Component {
 			TravellerName = document.getElementById('username').value.trim(),
 			TravellerEnname = document.getElementById('en_username').value.trim(),
 			PassportNo = document.getElementById('passport').value.trim(),
-			TravellerSex = document.getElementById('sex').value;
+			TravellerSex = document.getElementById('sex').value,
+			brithday = document.getElementById('brithday').value;
 
 		if( !TravellerName ){
 			modal.error('请填写中文姓名');
@@ -112,11 +124,11 @@ class AddVisitor extends React.Component {
 			return;
 		}
 		if( !TravellerEnname ){
-			modal.error('请填写英文姓名');
+			modal.error('请填写姓名拼音');
 			return;
 		}
 		if( !/^[A-Za-z]+$/.test( TravellerEnname ) ){
-			modal.error('英文姓名填写有误');
+			modal.error('姓名拼音填写有误');
 			return;
 		}
 		if( !PassportNo ){
@@ -125,6 +137,14 @@ class AddVisitor extends React.Component {
 		}
 		if( !/^[0-9a-zA-Z]*$/.test( PassportNo ) ){
 			modal.error('护照号码填写有误');
+			return;
+		}
+		if( !brithday ){
+			modal.error('请填写生日');
+			return;
+		}
+		if( new Date(brithday) > new Date() ){
+			modal.error('生日大于今天');
 			return;
 		}
 		/*if( !/^(^\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$/.test( PassportNo ) ){
@@ -175,10 +195,10 @@ class AddVisitor extends React.Component {
 		function addUser(){
 			axios.post('/Users/AddTraveller',{
 				CustomerID: sessionStorage.getItem('CustomerID'),
-				TravellerName: document.getElementById('username').value,
-				TravellerEnname: document.getElementById('en_username').value,
-				PassportNo:document.getElementById('passport').value,
-				Birthday:convertDate(that.state.time,'YYYY-MM-DD'),
+				TravellerName: document.getElementById('username').value.trim(),
+				TravellerEnname: document.getElementById('en_username').value.trim(),
+				PassportNo:document.getElementById('passport').value.trim(),
+				Birthday:document.getElementById('brithday').value,
 				TravellerSex: document.getElementById('sex').value === '男' ? 0 : 1
 			}).then(function (response) {
 
@@ -186,7 +206,10 @@ class AddVisitor extends React.Component {
 				if( data.ErrorCode === 200 ){
 					modal.success('新增成功');
 					setTimeout(function(){
-						document.getElementById('md-modal-success').classList.remove('show');
+						if( document.getElementById('md-modal-success') ){
+							document.getElementById('md-modal-success').classList.remove('show');
+						}
+						document.getElementById('masker').style.display = 'none';
 						window.location.hash = "#/visitor";
 					},1000);
 				}else{
@@ -232,6 +255,8 @@ class AddVisitor extends React.Component {
 			}
 		}
 	}
+	calendarClick(){
+	}
 	render(){
 
 		const copyUrl = 'http://' + window.location.host+'/wap/addVisitor.html?EncryptCustomerID='+this.state.EncryptCustomerID;
@@ -255,12 +280,12 @@ class AddVisitor extends React.Component {
 			 			</div>
 			 			<div className="form-item">
 			 				<label><i className="mandatory-fields">*</i>生日:</label>
-			 				<span className="calendar-box">
+			 				<span className="calendar-box" >
 			 					{/*<input id="brithday" type="text" readOnly onClick={this.handleClick.bind(this)} value={convertDate(this.state.time,'YYYY-MM-DD')} onChange={this.change.bind(this)} />*/}
-			 					<input id="brithday" type="text" readOnly  onClick={this.calendarShow.bind(this)}/>
+			 					<input id="brithday" type="text" readOnly placeholder="生日" />
 			 					<i className="icon-calendar fa fa-calendar"></i>
 			 				</span>
-			 				{/*<DatePicker  theme="ios" dateFormat={this.state.dateFormat} value={this.state.time} isOpen={this.state.isOpen} 
+			 				{/*<DatePicker theme="ios" dateFormat={this.state.dateFormat} value={this.state.time} isOpen={this.state.isOpen} 
 			 					onSelect={this.handleSelect.bind(this)} onCancel={this.handleCancel.bind(this)} />*/}
 			 			</div>
 			 			<div className="form-item">

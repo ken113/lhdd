@@ -2,13 +2,12 @@
 
 	height:calc( 100% - .5rem );
 	overflow: auto;
-    height: 100%;
-    -webkit-overflow-scrolling: touch;
-    z-index: 1;
+    //height: 100%;
+    //-webkit-overflow-scrolling: touch;
+    z-index: 1000;
 
 	.user-form{
 		margin:.2rem;
-
 		h3{
 			//font-weight: 400;
 			color:#000;

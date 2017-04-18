@@ -2,13 +2,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Link } from 'react-router';
 import { getUrlParam,convertDate,modal,setTitle } from './../lib/common';
-//import DatePicker from 'react-mobile-datepicker';
+import DatePicker from 'react-mobile-datepicker';
+import touch from 'touchjs';
 //import TopNav from './topNav';
 import BtmNav from './btmNav'
 import axios from 'axios';
 
 import './../sass/editVisitor.scss';
-
 
 class EditVisitor extends React.Component {
 	constructor( props ) {
@@ -29,6 +29,7 @@ class EditVisitor extends React.Component {
 			},
 			time : new Date(),
 			isOpen: false,
+			dateFormat: ['YYYY年', 'MM月', 'DD日'],
 		}
 	}
 	componentWillMount(){
@@ -94,19 +95,43 @@ class EditVisitor extends React.Component {
 		})
 
 
+		
+
+
 		var years = [];
 		for(var i = 1930;i<2018;i++){
 			years.push( i );
 		}
+		$("#mdatetimer").remove();
 		$('#brithday').mdatetimer({ 
 	        mode : 1, //时间选择器模式 
 	        format : 2, //时间格式化方式 
 	        years : years, //年份数组 
 	        nowbtn : false //是否显示现在按钮 
-		});	
+		});
+		//sessionStorage.setItem('badDatePicker','xxxxxxx');
 
-		sessionStorage.setItem('badDatePicker','xxxxxxx');
+		setTimeout(function(){
+			document.getElementsByClassName('mt_panel')[0].addEventListener('touchend', function(e){
+		          //this.style.display='none';
+		          e.preventDefault();
+		    });
+		    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
+		},0);
+
+	}
+	handleClick(){
+		this.setState({ isOpen: true });
+	}
+	handleCancel(){
+		this.setState({ isOpen: false });
+	}
+	handleSelect( time ){
+		this.setState({ time, isOpen: false });
+	}
+	change(e){
+		this.setState({ time, isOpen: false });
 	}
 	showElse( e ){
 		//debugger;
@@ -118,6 +143,7 @@ class EditVisitor extends React.Component {
 			setTimeout(function(){
 				if( target.checked ){
 					elseBox.className = 'ei-box show';
+					//document.removeEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 				}else{
 					elseBox.className = 'ei-box';
 				}
@@ -131,10 +157,9 @@ class EditVisitor extends React.Component {
 			}else{
 				elseBox.className = 'ei-box show';
 				checkbox.checked = true;
+				//document.removeEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 			}
 		}
-		
-
 	}
 	changeInput(e){
 		
@@ -237,7 +262,7 @@ class EditVisitor extends React.Component {
 				return;
 			}
 			if( !/^[0-9]*$/.test(Weight) ){
-				modal.error('填写填写有误');
+				modal.error('体重填写有误');
 				return;
 			}
 			if( !ShoesSize ){
@@ -261,9 +286,9 @@ class EditVisitor extends React.Component {
 
 		axios.post('/Users/EditTraveller',{
 			TravellerID: that.state.TravellerID,
-			TravellerName:that.state.TravellerName,
-			TravellerEnname:that.state.TravellerEnname,
-			PassportNo:that.state.PassportNo,
+			TravellerName:that.state.TravellerName.trim(),
+			TravellerEnname:that.state.TravellerEnname.trim(),
+			PassportNo:that.state.PassportNo.trim(),
 			Birthday:document.getElementById('brithday').value.trim(),
 			TravellerSex: document.getElementById('sex').value === '男' ? 0 : 1
 		}).then(function (response) {
@@ -321,7 +346,7 @@ class EditVisitor extends React.Component {
 	render(){
 
 		return(
-			 <div className="md-editVisitor">
+			 <div className="md-editVisitor" id="editVisitor">
 			 	{/*<TopNav title='修改常用游客'/>*/}
 			 	<div className="user-form">
 			 		<div className="base-info">
@@ -341,8 +366,11 @@ class EditVisitor extends React.Component {
 			 			<div className="form-item" onClick={this.showDatePicker.bind(this)}>
 			 				<label><i className="mandatory-fields">*</i>生日:</label>
 			 				<span className="calendar-box">
+			 					{/*<input id="brithday" type="text" readOnly onClick={this.handleClick.bind(this)} value={convertDate(this.state.time,'YYYY-MM-DD')} onChange={this.change.bind(this)} />*/}
 			 					<input id="brithday" type="text" readOnly  value={this.state.Birthday} onChange={this.changeInput.bind(this)} placeholder="选择出生日期"/>
 			 					<i className="icon-calendar fa fa-calendar"></i>
+			 					{/*<DatePicker theme="ios" dateFormat={this.state.dateFormat} value={this.state.time} isOpen={this.state.isOpen} 
+			 						onSelect={this.handleSelect.bind(this)} onCancel={this.handleCancel.bind(this)} />*/}
 			 				</span>
 			 			</div>
 			 			<div className="form-item">
@@ -390,3 +418,4 @@ class EditVisitor extends React.Component {
 }
 
 export default EditVisitor;
+//export default createForm()(EditVisitor);

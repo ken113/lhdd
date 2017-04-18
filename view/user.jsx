@@ -54,8 +54,10 @@ class User extends React.Component {
 	showRQ(show){
 		let rqBox = document.getElementById('rqBox');
 		if( show ){
+			document.getElementById('masker').style.display = 'block';
 			rqBox.style.display = 'block';
 		}else{
+			document.getElementById('masker').style.display = 'none';
 			rqBox.style.display = 'none';
 		}
 	}

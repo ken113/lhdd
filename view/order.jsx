@@ -16,7 +16,8 @@ class Order extends React.Component {
 			pendingList:[],
 			tripList:null,
 			tripDate:[],
-			allList:[]
+			allList:[],
+			allOrderUrl:window.allOrderUrl,
 		}
 	}
 	componentWillMount(){
@@ -117,6 +118,16 @@ class Order extends React.Component {
 			now = new Date(),
 			month = dt.getMonth() + 1,
 			date = dt.getDate(),
+			zhou = dt.getDay(),
+			zhouJson = {
+				0:'星期天',
+				1:'星期一',
+				2:'星期二',
+				3:'星期三',
+				4:'星期四',
+				5:'星期五',
+				6:'星期六',
+			},
 			days = Math.floor( ( dt - now ) / ( 24*60*60*1000 ) );
 
 		if( days === -1 ){
@@ -126,7 +137,7 @@ class Order extends React.Component {
 		}else if( days === 1 ){
 			return month + '月' + date + '日 后天';
 		}else{
-			return month + '月' + date + '日';
+			return month + '月' + date + '日 ' + zhouJson[zhou];
 		}
 		
 
@@ -146,14 +157,14 @@ class Order extends React.Component {
 			 				<div className="order-info" key={index} onClick={this.goNext.bind(this,result.CustomerState,result.OrderID)}>
 				 				<div className="if-lf">
 				 					<div className="order-title">{result.cnItemName}</div>
-				 					<div className="order-person">人数:
-				 						<span><em>{result.AdultNum}</em>成人</span>
-				 						<span><em>{result.ChildNum}</em>儿童</span>
-				 						<span><em>{result.INFNum}</em>婴儿</span>
+				 					<div className="order-person">人数：
+				 						<span><em>{result.AdultNum} </em>成人</span>
+				 						<span><em>{result.ChildNum} </em>儿童</span>
+				 						<span><em>{result.INFNum} </em>婴儿</span>
 				 					</div>
 				 				</div>
 				 				<div className={ 'if-rt status-' + result.CustomerState }>
-				 					<i className="fa fa-ellipsis-h"></i>
+				 					<i className={'fa icon-face'+result.CustomerState}></i>
 				 					<span className="">{result.stateName}</span>
 				 				</div>
 				 			</div>
@@ -173,10 +184,10 @@ class Order extends React.Component {
 					 				<div className="order-info" key={index} onClick={this.goNext.bind(this,result.CustomerState,result.OrderID)}>
 						 				<div className="if-lf">
 						 					<div className="order-title">{result.cnItemName}</div>
-						 					<div className="order-person">人数:
-						 						<span><em>{result.AdultNum}</em>成人</span>
-						 						<span><em>{result.ChildNum}</em>儿童</span>
-						 						<span><em>{result.INFNum}</em>婴儿</span>
+						 					<div className="order-person">人数：
+						 						<span><em>{result.AdultNum} </em>成人</span>
+						 						<span><em>{result.ChildNum} </em>儿童</span>
+						 						<span><em>{result.INFNum} </em>婴儿</span>
 						 					</div>
 						 				</div>
 						 				<div className={ 'if-rt status-' + result.CustomerState }>
@@ -192,7 +203,7 @@ class Order extends React.Component {
 			 	<section className="order-box all">
 			 		<div className="btn" >
 			 			{/*<Link to="orderAll">查看我的全部订单</Link>*/}
-			 			<a href="http://my.dodotour.cn/Orders/allOrder" >查看我的全部订单</a>
+			 			<a href="/Orders/AllOrder" >查看我的全部订单</a>
 			 		</div>
 			 	</section>
 			 	<BtmNav/>
