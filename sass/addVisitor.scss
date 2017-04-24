@@ -39,8 +39,9 @@
 			.icon-calendar{
 				color:#2E9DE6;
 				position:absolute;
-				right:.1rem;;
+				right:.1rem;
 				top:.06rem;
+				z-index: 1;
 			}
 		}
 	}

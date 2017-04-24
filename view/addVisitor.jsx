@@ -280,9 +280,9 @@ class AddVisitor extends React.Component {
 			 			</div>
 			 			<div className="form-item">
 			 				<label><i className="mandatory-fields">*</i>生日:</label>
-			 				<span className="calendar-box" >
+			 				<span className="calendar-box"  onClick={this.calendarShow.bind(this)}>
 			 					{/*<input id="brithday" type="text" readOnly onClick={this.handleClick.bind(this)} value={convertDate(this.state.time,'YYYY-MM-DD')} onChange={this.change.bind(this)} />*/}
-			 					<input id="brithday" type="text" readOnly placeholder="生日" />
+			 					<input id="brithday" type="text" readOnly placeholder="生日"/>
 			 					<i className="icon-calendar fa fa-calendar"></i>
 			 				</span>
 			 				{/*<DatePicker theme="ios" dateFormat={this.state.dateFormat} value={this.state.time} isOpen={this.state.isOpen} 

@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Link } from 'react-router';
 import axios from 'axios';
-import { delCookie,setTitle } from './../lib/common';
+import { delCookie,setTitle,modal } from './../lib/common';
 
 //import TopNav from './topNav';
 import BtmNav from './btmNav'
@@ -52,6 +52,11 @@ class User extends React.Component {
 		window.location.hash = "#/login";
 	}
 	showRQ(show){
+
+		if( this.state.IsWechatBind == true ){
+			modal.alert('您已绑定微信');
+			return;
+		}
 		let rqBox = document.getElementById('rqBox');
 		if( show ){
 			document.getElementById('masker').style.display = 'block';
@@ -75,7 +80,7 @@ class User extends React.Component {
 			 		<div className="list-item" onClick={this.showRQ.bind(this,true)}><i className="left-icon fa fa-wechat"></i><span>微信绑定</span><i className="right-icon fa fa-angle-right"></i><em>{this.state.IsWechatBind ? '已绑定' : '未绑定' }</em></div>
 			 		<Link to="modifyPwd"><div className="list-item"><i className="left-icon fa fa-lock"></i><span>修改密码</span><i className="right-icon fa fa-angle-right"></i></div></Link>
 			 		<div className="list-item"><i className="left-icon fa fa-question-circle"></i><span>帮助</span><i className="right-icon fa fa-angle-right"></i></div>
-			 		<div className="list-item"><i className="left-icon fa fa-phone"></i><span>联系客服</span><i className="right-icon phone"><a href="tel:+075583973088">0755-83973088</a></i></div>
+			 		<div className="list-item"><i className="left-icon fa fa-phone"></i><span>联系客服</span><i className="right-icon phone"><a href="tel:18124516440">18124516440</a></i></div>
 			 	</div>
 
 			 	<div className="user-signOut">

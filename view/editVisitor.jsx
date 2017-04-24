@@ -92,34 +92,30 @@ class EditVisitor extends React.Component {
 					//document.documentElement.style.height = document.getElementsByClassName('user-form')[0].clientHeight;
 				}
 			}
-		})
 
+			var years = [];
+			for(var i = 1930;i<2018;i++){
+				years.push( i );
+			}
+			$("#mdatetimer").remove();
+			$('#brithday').mdatetimer({ 
+		        mode : 1, //时间选择器模式 
+		        format : 2, //时间格式化方式 
+		        years : years, //年份数组 
+		        nowbtn : false //是否显示现在按钮 
+			});
+			//sessionStorage.setItem('badDatePicker','xxxxxxx');
 
-		
+			setTimeout(function(){
+				document.getElementsByClassName('mt_panel')[0].addEventListener('touchend', function(e){
+			          //this.style.display='none';
+			          e.preventDefault();
+			    });
+			    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
+			},0);
 
-		var years = [];
-		for(var i = 1930;i<2018;i++){
-			years.push( i );
-		}
-		$("#mdatetimer").remove();
-		$('#brithday').mdatetimer({ 
-	        mode : 1, //时间选择器模式 
-	        format : 2, //时间格式化方式 
-	        years : years, //年份数组 
-	        nowbtn : false //是否显示现在按钮 
-		});
-		//sessionStorage.setItem('badDatePicker','xxxxxxx');
-
-		setTimeout(function(){
-			document.getElementsByClassName('mt_panel')[0].addEventListener('touchend', function(e){
-		          //this.style.display='none';
-		          e.preventDefault();
-		    });
-		    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
-		},0);
-
+			})
 	}
 	handleClick(){
 		this.setState({ isOpen: true });

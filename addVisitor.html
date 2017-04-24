@@ -146,7 +146,9 @@ $(function(){
 			EncryptCustomerID:EncryptCustomerID,
 		},
 		success:function( data ){
-			$('.tips-msg span').text( data.UserName );
+			if( data.UserName ){
+				$('.tips-msg span').text( data.UserName );
+			}
 		}
 	});
 
