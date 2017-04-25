@@ -8,7 +8,7 @@ import axios from 'axios';
 import { setTitle,loading,modal } from './../lib/common';
 import './../sass/order.scss';
 
-//import DatePicker from './../component/DatePicker';
+import DatePicker from './../component/DatePicker';
 
 class Order extends React.Component {
 	constructor( props ) {
@@ -208,7 +208,7 @@ class Order extends React.Component {
 			 		</div>
 			 	</section>
 			 	<BtmNav/>
-			 	{/*<DatePicker/>*/}
+			 	<DatePicker/>
 			 </div>
 		 )
 	}

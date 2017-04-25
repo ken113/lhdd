@@ -3,11 +3,20 @@ import { render } from 'react-dom';
 import IScroll from 'iScroll';
 import './DatePicker.scss';
 
+
+let yearList = [];
+for(let i=1920;i<2018;i++){
+	yearList.push( i );
+}
+
 class DatePicker extends React.Component {
 	constructor( props ) {
 		super( props );
 		this.state = {
 			date: this.props.date ? new Date( this.props.date ) : new Date(),
+			yearList:yearList,
+			monthList:[1,2,3,4,5,6,7,8,9,10,11,12],
+			dayList:[],
 			scrollConf: {
 				snap : 'li',
 				snapSpeed: 600,
@@ -19,11 +28,18 @@ class DatePicker extends React.Component {
 	}
 	componentDidMount(){
 
-		const that = this;
+		const that = this,
+			year = this.state.date.getFullYear(),
+			month = this.state.date.getMonth() + 1,
+			days = new Date( year,month,0).getDate();
 
-		this.initYear();
-		this.initMonth();
-		this.initDay();
+		let dayList = [];
+		for(let i = 1; i<days+1;i++){
+			dayList.push( i );
+		}
+		this.setState({
+			dayList
+		});
 
 		setTimeout(function(){
 
@@ -35,6 +51,9 @@ class DatePicker extends React.Component {
 			const yearScroll = new IScroll('.dp_year', that.state.scrollConf);
 			yearScroll.on('scrollEnd', function(){
 				that.updateSelected( dpYear,this );
+				const year = dpYear.querySelector('.selected').dataset.year*1,
+					month = dpMonth.querySelector('.selected').dataset.month*1;
+				that.updateDays( year,month );
 			});
 
 			const monthScroll = new IScroll('.dp_month', that.state.scrollConf);
@@ -75,41 +94,6 @@ class DatePicker extends React.Component {
 		},0);
 		
 	}
-	initYear(){
-		let yearList = document.createElement('ul'),
-			html = '<li class="dp_note">选择年份</li><li></li>';
-		for(let i = 1920;i<2018;i++){
-			html += '<li data-year='+ i +'>'+ i +'年</li>';
-		}
-		html += '<li></li><li></li>';
-		yearList.innerHTML = html;
-		document.querySelector('.dp_year').appendChild( yearList );
-	}
-	initMonth(){
-		let monthList = document.createElement('ul'),
-			html = '<li class="dp_note">选择月份</li><li></li>';
-		for(let i = 1;i<13;i++){
-			html += '<li data-month='+ i +'>'+ i +'月</li>';
-		}
-		html += '<li></li><li></li>';
-		monthList.innerHTML = html;
-		document.querySelector('.dp_month').appendChild( monthList );
-	}
-	initDay(){
-
-		let dayList = document.createElement('ul'),
-			html = '<li class="dp_note">选择日期</li><li></li>',
-			date = this.state.date,
-			year = date.getFullYear(),
-			month = date.getMonth() + 1,
-			days = new Date( year,month,0).getDate();
-		for(let i = 1;i<days+1;i++){
-			html += '<li data-day='+ i +'>'+ i +'日</li>';
-		}
-		html += '<li></li><li></li>';
-		dayList.innerHTML = html;
-		document.querySelector('.dp_day').appendChild( dayList );
-	}
 	updateSelected( container, iscroll ){
 		const index = (-iscroll.y) / document.getElementById('datePicker').getElementsByTagName('li')[0].clientHeight + 2,
 			current = container.getElementsByTagName('li')[ index ];
@@ -119,27 +103,27 @@ class DatePicker extends React.Component {
 	}
 	updateDays( year,month ){
 
-		const days = new Date(year, month, 0).getDate(),
+		const days = new Date( year, month, 0 ).getDate(),
 			dpDay = document.querySelector('.dp_day'),
 			that = this;
 
-		dpDay.innerHTML = "";
-		let dayList = document.createElement('ul'),
-			html = '<li class="dp_note">选择日期</li><li></li>';
-		for(let i = 1;i< days+1;i++){
-			html += '<li data-day='+ i +'>'+ i +'日</li>';
+		let dayList = [];
+		for(let i = 1; i<days+1;i++){
+			dayList.push( i );
 		}
-		html += '<li></li><li></li>';
-		dayList.innerHTML = html;
-		dpDay.appendChild( dayList );
-
-		const dayScroll = new IScroll('.dp_day', that.state.scrollConf );
-		dayScroll.on('scrollEnd', function(){
-			that.updateSelected( dpDay,this );
+		this.setState({
+			dayList
 		});
 
-		document.querySelector('[data-day="1"]').className += ' selected';
-
+		setTimeout(function(){
+			const dayScroll = new IScroll('.dp_day', that.state.scrollConf );
+			dayScroll.on('scrollEnd', function(){
+				that.updateSelected( dpDay,this );
+			});
+			document.querySelector('[data-day="1"]').className += ' selected';
+			//dayScroll.scrollTo(0,0);
+		},0)
+		
 	}
 	ok(){
 		const container = document.getElementById('datePicker'),
@@ -164,10 +148,31 @@ class DatePicker extends React.Component {
 					<h3 className="dp_title">请选择时间</h3>
 					<div className="dp_body">
 						<div className="dp_item dp_year">
+							<ul>
+								<li></li><li></li>
+								{this.state.yearList.map( (item,index) => (
+									<li key={index} data-year={item}>{item}年</li>
+								))}
+								<li></li><li></li>
+							</ul>
 						</div>
 						<div className="dp_item dp_month">
+							<ul>
+								<li></li><li></li>
+								{this.state.monthList.map( (item,index) => (
+									<li key={index} data-month={item}>{item}月</li>
+								))}
+								<li></li><li></li>
+							</ul>
 						</div>
 						<div className="dp_item dp_day">
+							<ul>
+								<li></li><li></li>
+								{this.state.dayList.map( (item,index) => (
+									<li key={index} data-day={item}>{item}日</li>
+								))}
+							<li></li><li></li>
+							</ul>
 						</div>
 					<div className="dp_indicate"></div>
 				</div>
